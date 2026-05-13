@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "427119384681",
+    "project_id": "android-projects-cae81",
+    "storage_bucket": "android-projects-cae81.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427119384681:android:346307391d404050dfeaf8",
+        "android_client_info": {
+          "package_name": "gun.edu.smartcooking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBDvRRbk6-52pQkB2ZZJLlq602FHrpcrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

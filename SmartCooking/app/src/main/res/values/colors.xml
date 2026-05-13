@@ -2,4 +2,27 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- SmartCooking Brand Colors -->
+    <color name="primary">#8B3A0F</color>
+    <color name="primary_dark">#6D2D0A</color>
+    <color name="primary_light">#B5612E</color>
+    <color name="accent">#E8845C</color>
+    <color name="accent_light">#F5A882</color>
+
+    <!-- Background Colors -->
+    <color name="splash_bg">#F5F3F0</color>
+    <color name="background">#FAFAFA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="card_bg">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#2D1810</color>
+    <color name="text_secondary">#7A7A7A</color>
+    <color name="text_hint">#BDBDBD</color>
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="error">#E53935</color>
+    <color name="warning">#FF9800</color>
 </resources>
