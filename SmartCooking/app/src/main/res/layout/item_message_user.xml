@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="end"
+    android:orientation="vertical"
+    android:paddingVertical="6dp">
+
+    <!-- Label: You + Avatar -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/label_you"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <!-- User Avatar -->
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_pantry_icon" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:contentDescription="User"
+                android:src="@drawable/ic_profile"
+                app:tint="@color/text_secondary" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- User Message Bubble -->
+    <TextView
+        android:id="@+id/tvUserMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_chat_bubble_user"
+        android:elevation="1dp"
+        android:lineSpacingExtra="4dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+</LinearLayout>

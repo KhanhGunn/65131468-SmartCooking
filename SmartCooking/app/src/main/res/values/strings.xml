@@ -26,4 +26,105 @@
     <string name="hint_create_password">Create a password</string>
     <string name="btn_register">Đăng ký ngay ➔</string>
     <string name="already_have_account">Already have an account? Đăng nhập</string>
+
+    <!-- Home/Recipes Screen -->
+    <string name="greeting_user">Chào Maria! 👋</string>
+    <string name="home_subtitle">Let\'s see what\'s cooking today.</string>
+    <string name="ai_suggestion_title">Gợi ý món ăn AI</string>
+    <string name="smart_suggestion">Smart Suggestion</string>
+
+    <!-- Categories -->
+    <string name="cat_all">All</string>
+    <string name="cat_breakfast">Breakfast</string>
+    <string name="cat_lunch">Lunch</string>
+    <string name="cat_dinner">Dinner</string>
+    <string name="cat_healthy">Healthy</string>
+    <string name="cat_vegetarian">Vegetarian</string>
+
+    <!-- Recipes Data -->
+    <string name="recipe_featured_name">Vibrant Quinoa Power Bowl</string>
+    <string name="recipe_featured_desc">A nutrient-dense blend of ancient grains, fresh market vegetables, and a zesty lemon-tahini dressing. Perfec…</string>
+    <string name="recipe_featured_time">15 min</string>
+    <string name="recipe_featured_kcal">320 kcal</string>
+
+    <string name="recipe_2_name">Spring Greens &amp; Egg Salad</string>
+    <string name="recipe_2_time">10 min</string>
+    <string name="recipe_2_kcal">250 kcal</string>
+
+    <string name="recipe_3_name">Rustic Margherita Pizza</string>
+    <string name="recipe_3_time">25 min</string>
+    <string name="recipe_3_kcal">450 kcal</string>
+
+    <string name="section_plan">Today\'s Plan</string>
+    <string name="section_popular">Công thức phổ biến</string>
+
+    <!-- Recipes Page -->
+    <string name="label_smart_suggestion">✦ Smart Suggestion</string>
+    <string name="label_vegetarian">Vegetarian</string>
+    <string name="label_healthy">Healthy</string>
+    <string name="label_use_ingredients">Use Ingredients</string>
+    <string name="label_prep_time_val">25 mins</string>
+    <string name="featured_recipe_name">Superfood Quinoa Bowl</string>
+    <string name="featured_recipe_desc">Perfect for your current macros.</string>
+    <string name="recipe_1_name">Margherita Pizza</string>
+    <string name="recipe_1_time">45m</string>
+
+    <!-- Home fragment -->
+    <string name="btn_start_prep">Start Prep</string>
+    <string name="plan_lunch_time">Lunch • 1:00 PM</string>
+    <string name="suggestion_2_name">Spicy Tomato Pasta</string>
+
+    <!-- Inventory Page -->
+    <string name="inventory_insights_title">Inventory Insights</string>
+    <string name="inventory_insights_desc">You have 3 items expiring within the next 48 hours.\nLet\'s plan a meal to use them up.</string>
+    <string name="btn_generate_recipe">Generate Recipe Idea</string>
+    <string name="total_items_count">142</string>
+    <string name="total_items_label">Total Items Logged</string>
+
+    <!-- Inventory Categories -->
+    <string name="category_vegetables">Vegetables</string>
+    <string name="category_proteins">Proteins</string>
+    <string name="category_pantry">Pantry</string>
+    <string name="label_view_all">View All</string>
+
+    <!-- Inventory Items - Vegetables -->
+    <string name="item_cherry_tomatoes">Cherry Toma…</string>
+    <string name="item_cherry_tomatoes_full">Cherry Tomatoes</string>
+    <string name="item_cherry_tomatoes_qty">Qty: 2 lbs</string>
+    <string name="item_baby_spinach">Baby Spinach</string>
+    <string name="item_baby_spinach_qty">Qty: 1 bag</string>
+
+    <!-- Inventory Items - Proteins -->
+    <string name="item_chicken_breast">Chicken Breast</string>
+    <string name="item_chicken_breast_qty">Qty: 3 pieces</string>
+    <string name="item_atlantic_salmon">Atlantic Salm…</string>
+    <string name="item_atlantic_salmon_full">Atlantic Salmon</string>
+    <string name="item_atlantic_salmon_qty">Qty: 1.5 lbs</string>
+
+    <!-- Inventory Items - Pantry -->
+    <string name="item_olive_oil">Olive …</string>
+    <string name="item_olive_oil_full">Olive Oil</string>
+    <string name="item_olive_oil_qty">Qty: 500…</string>
+    <string name="item_penne_pasta">Penn…</string>
+    <string name="item_penne_pasta_full">Penne Pasta</string>
+    <string name="item_penne_pasta_qty">Qty: 2 b…</string>
+
+    <!-- Inventory Badges -->
+    <string name="label_fresh">Fresh</string>
+    <string name="label_use_soon">Use Soon</string>
+    <string name="label_expired">Expired</string>
+
+    <!-- Chef Assistant Chat -->
+    <string name="chef_assistant_title">Chef Assistant</string>
+    <string name="btn_clear_chat">Clear</string>
+    <string name="label_ai_chef">AI Chef</string>
+    <string name="label_you">You</string>
+    <string name="chat_hint">Hỏi AI Chef cách nấu, nguyên liệu…</string>
+    <string name="chat_welcome">Chào bạn! Hôm nay bạn muốn nấu món gì? Tôi có thể giúp bạn lên thực đơn, tìm công thức hoặc xử lý những nguyên liệu đang có sẵn trong tủ lạnh.</string>
+    <string name="suggestion_1">Gợi ý món ăn tối nay</string>
+    <string name="suggestion_2">Cách thay thế nguyên liệu</string>
+    <string name="suggestion_3">Món ăn cho người ăn kiêng</string>
+    <string name="chat_typing">AI Chef đang suy nghĩ…</string>
+    <string name="chat_error">Xin lỗi, có lỗi xảy ra. Vui lòng thử lại.</string>
+    <string name="chat_cleared">Đã xóa cuộc trò chuyện</string>
 </resources>

@@ -12,17 +12,39 @@
 
     <!-- Background Colors -->
     <color name="splash_bg">#F5F3F0</color>
-    <color name="background">#FAFAFA</color>
+    <color name="background">#F7FAFD</color>
     <color name="surface">#FFFFFF</color>
     <color name="card_bg">#FFFFFF</color>
 
     <!-- Text Colors -->
-    <color name="text_primary">#2D1810</color>
-    <color name="text_secondary">#7A7A7A</color>
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#757575</color>
     <color name="text_hint">#BDBDBD</color>
+
+    <!-- UI Elements -->
+    <color name="badge_healthy">#E8F5E9</color>
+    <color name="text_healthy">#4CAF50</color>
+    <color name="badge_time">#F5F5F5</color>
+    <color name="nav_inactive">#9E9E9E</color>
+    <color name="orange_light">#FFF3E0</color>
 
     <!-- Status Colors -->
     <color name="success">#4CAF50</color>
     <color name="error">#E53935</color>
     <color name="warning">#FF9800</color>
+
+    <!-- Inventory Page -->
+    <color name="insights_bg">#FDEAE0</color>
+    <color name="badge_fresh">#4CAF50</color>
+    <color name="badge_use_soon">#FF9800</color>
+    <color name="badge_expired">#E53935</color>
+    <color name="fab_bg">#2E2E2E</color>
+    <color name="inventory_icon_green">#2E7D32</color>
+
+    <!-- Chef Assistant Chat -->
+    <color name="chat_bg">#F9F9F9</color>
+    <color name="chat_bubble_ai">#FFFFFF</color>
+    <color name="chat_bubble_user">#8B3A0F</color>
+    <color name="chat_input_bg">#F5F5F5</color>
+    <color name="user_avatar_bg">#EFEBE9</color>
 </resources>

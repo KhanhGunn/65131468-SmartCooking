@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ===== Category Filter Chips ===== -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Chip: All (Selected) -->
+                <TextView
+                    android:id="@+id/chipAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:background="@drawable/bg_chip_selected"
+                    android:drawableStart="@drawable/ic_sparkle"
+                    android:drawablePadding="6dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="18dp"
+                    android:text="@string/cat_all"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+
+                <!-- Chip: Breakfast -->
+                <TextView
+                    android:id="@+id/chipBreakfast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="18dp"
+                    android:text="@string/cat_breakfast"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <!-- Chip: Lunch -->
+                <TextView
+                    android:id="@+id/chipLunch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="18dp"
+                    android:text="@string/cat_lunch"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <!-- Chip: Dinner -->
+                <TextView
+                    android:id="@+id/chipDinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="18dp"
+                    android:text="@string/cat_dinner"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+                <!-- Chip: Healthy -->
+                <TextView
+                    android:id="@+id/chipHealthy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="18dp"
+                    android:text="@string/cat_healthy"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- ===== Featured Recipe Card (Smart Suggestion) ===== -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFeatured"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Food Image Placeholder -->
+                <ImageView
+                    android:id="@+id/ivFeaturedImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#D7CCC8"
+                    android:contentDescription="@string/recipe_featured_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_utensils" />
+
+                <!-- Bottom gradient overlay for text readability -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_card_gradient_bottom" />
+
+                <!-- Smart Suggestion Badge (Top Left) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/bg_smart_suggestion_badge"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="@string/label_smart_suggestion"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <!-- Bottom Info Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="@string/recipe_featured_name"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <!-- Description -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/recipe_featured_desc"
+                        android:textColor="#E0E0E0"
+                        android:textSize="14sp" />
+
+                    <!-- Time & Calories Row -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Time"
+                            android:src="@drawable/ic_time"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/recipe_featured_time"
+                            android:textColor="#E0E0E0"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginStart="20dp"
+                            android:contentDescription="Calories"
+                            android:src="@drawable/ic_calories"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/recipe_featured_kcal"
+                            android:textColor="#E0E0E0"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ===== Recipe Card 2: Spring Greens & Egg Salad ===== -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRecipe2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Image with heart button -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp">
+
+                    <ImageView
+                        android:id="@+id/ivRecipe2Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#C8E6C9"
+                        android:contentDescription="@string/recipe_2_name"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_utensils" />
+
+                    <!-- Heart/Favorite Button -->
+                    <ImageView
+                        android:id="@+id/btnFavorite2"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/bg_heart_circle"
+                        android:contentDescription="Favorite"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_heart"
+                        app:tint="#757575" />
+                </FrameLayout>
+
+                <!-- Info Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="@string/recipe_2_name"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp" />
+
+                    <!-- Time & Calories -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Time"
+                            android:src="@drawable/ic_time"
+                            app:tint="@color/text_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/recipe_2_time"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginStart="20dp"
+                            android:contentDescription="Calories"
+                            android:src="@drawable/ic_calories"
+                            app:tint="@color/text_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/recipe_2_kcal"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ===== Recipe Card 3: Rustic Margherita Pizza ===== -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRecipe3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Image with heart button + category badge -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp">
+
+                    <ImageView
+                        android:id="@+id/ivRecipe3Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FFCCBC"
+                        android:contentDescription="@string/recipe_3_name"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_utensils" />
+
+                    <!-- Heart/Favorite Button -->
+                    <ImageView
+                        android:id="@+id/btnFavorite3"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/bg_heart_circle"
+                        android:contentDescription="Favorite"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_heart"
+                        app:tint="#757575" />
+                </FrameLayout>
+
+                <!-- Info Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Vegetarian Badge -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_category_badge"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/label_vegetarian"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="@string/recipe_3_name"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp" />
+
+                    <!-- Time & Calories -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Time"
+                            android:src="@drawable/ic_time"
+                            app:tint="@color/text_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/recipe_3_time"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginStart="20dp"
+                            android:contentDescription="Calories"
+                            android:src="@drawable/ic_calories"
+                            app:tint="@color/text_secondary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/recipe_3_kcal"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Bottom spacing for navigation bar -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
