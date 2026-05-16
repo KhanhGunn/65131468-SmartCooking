@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
  */
 public class GeminiApiService {
 
-    private static final String TAG = "GroqApiService";
+    private static final String TAG = "GeminiApiService";
     private static final String API_KEY = "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";
     private static final String API_URL = "https://api.groq.com/openai/v1/chat/completions";
     private static final String MODEL = "llama-3.3-70b-versatile";
@@ -45,8 +45,10 @@ public class GeminiApiService {
         executor = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
         conversationHistory = new ArrayList<>();
+        initSystemMessage();
+    }
 
-        // Thêm system message vào đầu lịch sử
+    private void initSystemMessage() {
         try {
             JSONObject systemMsg = new JSONObject();
             systemMsg.put("role", "system");
@@ -61,26 +63,22 @@ public class GeminiApiService {
         executor.execute(() -> {
             HttpURLConnection connection = null;
             try {
-                // 1. Thêm tin nhắn user vào lịch sử
                 JSONObject userMsg = new JSONObject();
                 userMsg.put("role", "user");
                 userMsg.put("content", userMessage);
                 conversationHistory.add(userMsg);
 
-                // 2. Tạo request body (OpenAI format)
                 JSONObject requestBody = new JSONObject();
                 requestBody.put("model", MODEL);
                 requestBody.put("temperature", 0.7);
                 requestBody.put("max_tokens", 1024);
 
-                // Messages array
                 JSONArray messages = new JSONArray();
                 for (JSONObject msg : conversationHistory) {
                     messages.put(msg);
                 }
                 requestBody.put("messages", messages);
 
-                // 3. Kết nối
                 URL url = new URL(API_URL);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
@@ -90,13 +88,11 @@ public class GeminiApiService {
                 connection.setReadTimeout(30000);
                 connection.setDoOutput(true);
 
-                // Gửi Request
                 try (OutputStream os = connection.getOutputStream()) {
                     byte[] input = requestBody.toString().getBytes(StandardCharsets.UTF_8);
                     os.write(input, 0, input.length);
                 }
 
-                // 4. Đọc Response
                 int responseCode = connection.getResponseCode();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
                         responseCode >= 200 && responseCode < 300
@@ -112,17 +108,14 @@ public class GeminiApiService {
                 reader.close();
 
                 String responseStr = response.toString();
-                Log.d(TAG, "Response code: " + responseCode);
 
                 if (responseCode == 200) {
-                    // Parse OpenAI format response
                     JSONObject json = new JSONObject(responseStr);
                     String aiResponse = json.getJSONArray("choices")
                             .getJSONObject(0)
                             .getJSONObject("message")
                             .getString("content");
 
-                    // Lưu phản hồi của AI vào lịch sử
                     JSONObject assistantMsg = new JSONObject();
                     assistantMsg.put("role", "assistant");
                     assistantMsg.put("content", aiResponse);
@@ -130,24 +123,12 @@ public class GeminiApiService {
 
                     mainHandler.post(() -> callback.onSuccess(aiResponse));
                 } else {
-                    Log.e(TAG, "API Error: " + responseStr);
                     if (conversationHistory.size() > 1) {
                         conversationHistory.remove(conversationHistory.size() - 1);
                     }
-                    String errorMsg;
-                    try {
-                        JSONObject errorJson = new JSONObject(responseStr);
-                        errorMsg = errorJson.getJSONObject("error").getString("message");
-                        if (errorMsg.length() > 150) errorMsg = errorMsg.substring(0, 150) + "...";
-                    } catch (Exception ex) {
-                        errorMsg = "Lỗi server (" + responseCode + ")";
-                    }
-                    String finalMsg = errorMsg;
-                    mainHandler.post(() -> callback.onError(finalMsg));
+                    mainHandler.post(() -> callback.onError("Lỗi server (" + responseCode + ")"));
                 }
-
             } catch (Exception e) {
-                Log.e(TAG, "Network Error: ", e);
                 if (conversationHistory.size() > 1) {
                     conversationHistory.remove(conversationHistory.size() - 1);
                 }
@@ -159,10 +140,13 @@ public class GeminiApiService {
     }
 
     public void clearHistory() {
-        // Giữ lại system message (index 0), xóa phần còn lại
-        JSONObject systemMsg = conversationHistory.get(0);
-        conversationHistory.clear();
-        conversationHistory.add(systemMsg);
+        if (conversationHistory.isEmpty()) {
+            initSystemMessage();
+        } else {
+            JSONObject systemMsg = conversationHistory.get(0);
+            conversationHistory.clear();
+            conversationHistory.add(systemMsg);
+        }
     }
 
     public interface GeminiCallback {

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(new InventoryFragment());
                 return true;
             } else if (id == R.id.nav_profile) {
-                Toast.makeText(this, "Cá nhân", Toast.LENGTH_SHORT).show();
+                loadFragment(new ProfileFragment());
                 return true;
             }
             return false;

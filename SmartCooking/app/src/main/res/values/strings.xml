@@ -127,4 +127,27 @@
     <string name="chat_typing">AI Chef đang suy nghĩ…</string>
     <string name="chat_error">Xin lỗi, có lỗi xảy ra. Vui lòng thử lại.</string>
     <string name="chat_cleared">Đã xóa cuộc trò chuyện</string>
+
+    <!-- Profile Page -->
+    <string name="profile_avatar_desc">Ảnh đại diện</string>
+    <string name="premium_icon_desc">Biểu tượng Premium</string>
+    <string name="premium_member">Premium Member</string>
+    <string name="profile_name">Chef Maria</string>
+    <string name="profile_bio">Home Cook Enthusiast &amp; Flavor Explorer</string>
+    <string name="profile_recipes_count">24</string>
+    <string name="profile_followers_count">1.2k</string>
+    <string name="profile_level">Expert</string>
+    <string name="label_recipes">Recipes</string>
+    <string name="label_followers">Followers</string>
+    <string name="label_level">Level</string>
+    <string name="section_general">General</string>
+    <string name="section_preferences">Preferences</string>
+    <string name="my_recipes">My Recipes</string>
+    <string name="cooking_history">Cooking History</string>
+    <string name="subscribed_plans">Subscribed Plans</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="help_support">Help &amp; Support</string>
+    <string name="navigate">Navigate</string>
+    <string name="logout">Log Out</string>
+    <string name="app_version">Version 2.4.1 (Premium)</string>
 </resources>

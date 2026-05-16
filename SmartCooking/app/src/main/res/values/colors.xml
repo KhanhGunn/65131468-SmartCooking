@@ -47,4 +47,9 @@
     <color name="chat_bubble_user">#8B3A0F</color>
     <color name="chat_input_bg">#F5F5F5</color>
     <color name="user_avatar_bg">#EFEBE9</color>
+
+    <!-- Profile Page -->
+    <color name="profile_green">#5D7A3A</color>
+    <color name="profile_menu_icon_bg">#FFF5EE</color>
+    <color name="divider">#E0E0E0</color>
 </resources>
