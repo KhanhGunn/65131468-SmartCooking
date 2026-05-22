@@ -6,17 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class ProfileFragment extends Fragment {
 
     private LinearLayout menuMyRecipes, menuCookingHistory, menuSubscribedPlans;
     private LinearLayout menuAccountSettings, menuHelpSupport;
     private LinearLayout btnLogout;
+    private TextView tvProfileName, tvProfileBio;
 
     @Nullable
     @Override
@@ -37,9 +42,34 @@ public class ProfileFragment extends Fragment {
         menuAccountSettings = view.findViewById(R.id.menuAccountSettings);
         menuHelpSupport = view.findViewById(R.id.menuHelpSupport);
         btnLogout = view.findViewById(R.id.btnLogout);
+        tvProfileName = view.findViewById(R.id.tvProfileName);
+        tvProfileBio = view.findViewById(R.id.tvProfileBio);
+
+        // Cập nhật thông tin user từ Firebase
+        updateUserInfo();
 
         // Thiết lập sự kiện click cho các menu
         setupMenuClickListeners();
+    }
+
+    /**
+     * Cập nhật thông tin user từ Firebase Auth
+     */
+    private void updateUserInfo() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Hiển thị tên
+            if (user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
+                tvProfileName.setText(user.getDisplayName());
+            } else {
+                tvProfileName.setText("Smart Chef");
+            }
+
+            // Hiển thị email trong bio
+            if (user.getEmail() != null) {
+                tvProfileBio.setText(user.getEmail());
+            }
+        }
     }
 
     /**
@@ -66,9 +96,13 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "Trợ giúp & Hỗ trợ", Toast.LENGTH_SHORT).show()
         );
 
-        // Nút đăng xuất - quay lại màn hình đăng nhập
+        // Nút đăng xuất - Firebase sign out
         btnLogout.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Đang đăng xuất...", Toast.LENGTH_SHORT).show();
+            // Đăng xuất Firebase
+            FirebaseAuth.getInstance().signOut();
+
+            Toast.makeText(getContext(), "Đã đăng xuất", Toast.LENGTH_SHORT).show();
+
             // Chuyển về màn hình đăng nhập
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -2,10 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
     <stroke
-        android:width="3dp"
-        android:color="#5D7A3A" />
-    <solid android:color="@android:color/transparent" />
-    <size
-        android:width="120dp"
-        android:height="120dp" />
+        android:width="2dp"
+        android:color="@color/profile_ring" />
+    <padding
+        android:bottom="4dp"
+        android:left="4dp"
+        android:right="4dp"
+        android:top="4dp" />
 </shape>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="24dp">
+        android:paddingBottom="100dp">
 
         <!-- ====== PROFILE HEADER SECTION ====== -->
         <LinearLayout
@@ -43,7 +43,7 @@
                         android:layout_gravity="center"
                         android:contentDescription="@string/profile_avatar_desc"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_profile" />
+                        android:src="@drawable/img_chef_avatar" />
                 </FrameLayout>
 
                 <!-- Premium Member Badge - positioned at bottom right -->

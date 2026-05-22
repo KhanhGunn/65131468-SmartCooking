@@ -43,6 +43,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Recipe Detail Screen -->
+        <activity
+            android:name=".RecipeDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SmartCooking" />
+
     </application>
 
 </manifest>

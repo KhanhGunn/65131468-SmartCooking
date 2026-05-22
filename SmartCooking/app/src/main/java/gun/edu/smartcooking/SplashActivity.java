@@ -15,6 +15,9 @@ import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class SplashActivity extends AppCompatActivity {
 
     private static final int SPLASH_DURATION = 3000; // 3 giây
@@ -97,9 +100,18 @@ public class SplashActivity extends AppCompatActivity {
             poweredByContainer.startAnimation(fadeInSlow);
         }, 1400);
 
-        // Chuyển sang LoginActivity sau SPLASH_DURATION
+        // Sau SPLASH_DURATION, kiểm tra đăng nhập rồi chuyển hướng
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+            Intent intent;
+            if (currentUser != null) {
+                // Đã đăng nhập → vào thẳng MainActivity
+                intent = new Intent(SplashActivity.this, MainActivity.class);
+            } else {
+                // Chưa đăng nhập → vào LoginActivity
+                intent = new Intent(SplashActivity.this, LoginActivity.class);
+            }
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             finish();

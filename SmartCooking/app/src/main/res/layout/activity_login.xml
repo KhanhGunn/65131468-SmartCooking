@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splash_bg"
+    android:background="@drawable/bg_login_gradient"
     android:fillViewport="true">
 
     <LinearLayout
@@ -16,21 +16,22 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="50dp" />
 
-        <!-- Logo Section -->
+        <!-- Brand Header Section -->
         <LinearLayout
             android:id="@+id/logoContainer"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:background="@drawable/bg_logo_container"
             android:backgroundTint="@color/accent"
-            android:elevation="4dp"
-            android:gravity="center">
+            android:elevation="6dp"
+            android:gravity="center"
+            android:padding="16dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_utensils"
                 app:tint="@color/white"
                 android:contentDescription="@string/app_logo_desc" />
@@ -40,42 +41,47 @@
             android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/app_name"
             android:textColor="@color/text_primary"
-            android:textSize="32sp" />
+            android:textSize="34sp"
+            android:letterSpacing="-0.02" />
 
         <TextView
             android:id="@+id/tvTagline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/login_tagline"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="Welcome back! Let's get cooking."
             android:textColor="@color/text_secondary"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            android:fontFamily="sans-serif" />
 
         <!-- Login Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp">
+            app:cardCornerRadius="28dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="26dp">
 
+                <!-- Email Input Group -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_email"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="sans-serif-medium" />
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -84,25 +90,29 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_edittext"
                     android:drawableStart="@android:drawable/ic_dialog_email"
-                    android:drawablePadding="12dp"
+                    android:drawablePadding="14dp"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
-                    android:paddingHorizontal="16dp"
-                    android:textSize="16sp"
-                    android:importantForAutofill="no" />
+                    android:paddingHorizontal="18dp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="15sp"
+                    android:importantForAutofill="no"
+                    app:tint="@color/text_secondary" />
 
+                <!-- Password Input Group -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginTop="18dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_password"
-                        android:textColor="@color/text_secondary"
+                        android:textColor="@color/text_primary"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="sans-serif-medium" />
 
                     <TextView
                         android:id="@+id/tvForgotPassword"
@@ -110,9 +120,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:text="@string/forgot_password"
-                        android:textColor="@color/primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/accent"
+                        android:textSize="13sp"
+                        android:fontFamily="sans-serif-medium" />
                 </RelativeLayout>
 
                 <EditText
@@ -122,34 +132,38 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_edittext"
                     android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                    android:drawablePadding="12dp"
+                    android:drawablePadding="14dp"
                     android:hint="@string/hint_password"
                     android:inputType="textPassword"
-                    android:paddingHorizontal="16dp"
-                    android:textSize="16sp"
-                    android:importantForAutofill="no" />
+                    android:paddingHorizontal="18dp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="15sp"
+                    android:importantForAutofill="no"
+                    app:tint="@color/text_secondary" />
 
+                <!-- Submit Button -->
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="26dp"
                     android:background="@drawable/bg_button"
                     android:text="@string/btn_login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:fontFamily="sans-serif-bold"
                     app:backgroundTint="@null" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Divider -->
+        <!-- Divider Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -157,7 +171,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#E0E0E0" />
+                android:background="#D1D5DB" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -165,30 +179,32 @@
                 android:paddingHorizontal="16dp"
                 android:text="@string/or_continue_with"
                 android:textColor="@color/text_secondary"
-                android:textSize="14sp" />
+                android:textSize="13sp"
+                android:fontFamily="sans-serif-medium" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
-                android:background="#E0E0E0" />
+                android:background="#D1D5DB" />
         </LinearLayout>
 
-        <!-- Social Buttons -->
+        <!-- Premium Social Logins -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_edittext"
+                android:background="@drawable/bg_social_button"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -197,16 +213,18 @@
                     android:layout_height="wrap_content"
                     android:text="Google"
                     android:textColor="@color/text_primary"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_edittext"
+                android:background="@drawable/bg_social_button"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -215,7 +233,8 @@
                     android:layout_height="wrap_content"
                     android:text="Facebook"
                     android:textColor="@color/text_primary"
-                    android:textStyle="bold" />
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-bold" />
             </LinearLayout>
         </LinearLayout>
 
@@ -224,10 +243,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/dont_have_account"
             android:textColor="@color/text_secondary"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            android:fontFamily="sans-serif"
+            android:clickable="true"
+            android:focusable="true" />
 
     </LinearLayout>
 </ScrollView>

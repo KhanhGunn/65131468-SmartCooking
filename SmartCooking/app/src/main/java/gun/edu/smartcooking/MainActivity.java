@@ -1,7 +1,6 @@
 package gun.edu.smartcooking;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNav = findViewById(R.id.bottomNavigation);
+
+        // Seed dữ liệu công thức lên Firebase (chỉ chạy nếu chưa có)
+        FirebaseHelper.getInstance().seedRecipesIfEmpty();
 
         // Thiết lập sự kiện khi chọn các tab ở thanh điều hướng bên dưới
         bottomNav.setOnItemSelectedListener(item -> {

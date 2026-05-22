@@ -13,6 +13,7 @@
 
         <!-- Greeting Section -->
         <TextView
+            android:id="@+id/tvGreeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -53,31 +54,34 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <!-- Large AI Card -->
+        <!-- Large AI Featured Card -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardFeatured"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="4dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/ivFeaturedImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_utensils"
-                    android:background="#E0E0E0"
+                    android:src="@drawable/img_pho_bo"
                     android:contentDescription="@string/featured_recipe_name" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_glow"
-                    android:alpha="0.6"/>
+                    android:background="@drawable/bg_detail_header_gradient" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -111,7 +115,7 @@
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="4dp"
                             android:text="@string/label_prep_time_val"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/white"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -136,17 +140,23 @@
 
         <!-- Use Ingredients Card -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardSuggestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="#FFF3E0"
             app:cardCornerRadius="20dp"
-            app:cardElevation="0dp">
+            app:cardElevation="2dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -157,7 +167,9 @@
                     android:text="@string/label_use_ingredients"
                     android:textColor="@color/accent"
                     android:textSize="12sp" />
+
                 <TextView
+                    android:id="@+id/tvSuggestionName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -183,30 +195,38 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="1dp">
+            app:cardElevation="2dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="12dp">
-                <View
+
+                <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:src="@drawable/img_quinoa_bowl"
+                    android:scaleType="centerCrop"
                     android:background="@drawable/bg_edittext"
-                    android:backgroundTint="#F5F5F5" />
+                    android:clipToOutline="true"
+                    android:contentDescription="Plan food" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/plan_lunch_time"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,6 +235,7 @@
                         android:textColor="@color/text_primary"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
@@ -247,60 +268,85 @@
 
             <!-- Card 1 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardPopular1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                app:cardCornerRadius="16dp">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/ivPopular1Image"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_utensils"
-                        android:background="#EEEEEE"
+                        android:src="@drawable/img_fried_rice"
                         android:contentDescription="@string/recipe_1_name" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="12dp">
+
                         <TextView
+                            android:id="@+id/tvPopular1Name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="@string/recipe_1_name"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
                             <ImageView
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
                                 android:src="@drawable/ic_time"
+                                app:tint="@color/accent"
                                 android:contentDescription="Time" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:text="@string/recipe_1_time"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
-                            <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
                             <ImageView
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
                                 android:src="@drawable/ic_star"
+                                app:tint="#FFB300"
                                 android:contentDescription="Rating" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="2dp"
                                 android:text="4.8"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -309,60 +355,85 @@
 
             <!-- Card 2 -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardPopular2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                app:cardCornerRadius="16dp">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <ImageView
+                        android:id="@+id/ivPopular2Image"
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_utensils"
-                        android:background="#EEEEEE"
+                        android:src="@drawable/img_spring_rolls"
                         android:contentDescription="@string/recipe_2_name" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="12dp">
+
                         <TextView
+                            android:id="@+id/tvPopular2Name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
                             android:text="@string/recipe_2_name"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            android:maxLines="1"
+                            android:ellipsize="end" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
                             <ImageView
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
                                 android:src="@drawable/ic_time"
+                                app:tint="@color/accent"
                                 android:contentDescription="Time" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
                                 android:text="@string/recipe_2_time"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
-                            <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
                             <ImageView
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"
                                 android:src="@drawable/ic_star"
+                                app:tint="#FFB300"
                                 android:contentDescription="Rating" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="2dp"
                                 android:text="4.9"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>

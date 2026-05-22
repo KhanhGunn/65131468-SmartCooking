@@ -166,10 +166,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#FFCCBC"
                                 android:contentDescription="@string/item_cherry_tomatoes_full"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_utensils" />
+                                android:src="@drawable/img_cherry_tomatoes" />
 
                             <!-- Fresh Badge -->
                             <TextView
@@ -251,10 +250,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#C8E6C9"
                                 android:contentDescription="@string/item_baby_spinach"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_utensils" />
+                                android:src="@drawable/img_baby_spinach" />
 
                             <!-- Use Soon Badge -->
                             <TextView
@@ -372,10 +370,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#EFEBE9"
                                 android:contentDescription="@string/item_chicken_breast"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_utensils" />
+                                android:src="@drawable/img_chicken_breast" />
 
                             <!-- Expired Badge -->
                             <TextView
@@ -457,10 +454,9 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#FFCCBC"
                                 android:contentDescription="@string/item_atlantic_salmon_full"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ic_utensils" />
+                                android:src="@drawable/img_atlantic_salmon_raw" />
 
                             <!-- Fresh Badge -->
                             <TextView

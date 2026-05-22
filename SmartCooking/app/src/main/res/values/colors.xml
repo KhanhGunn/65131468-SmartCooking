@@ -4,52 +4,40 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- SmartCooking Brand Colors -->
-    <color name="primary">#8B3A0F</color>
+    <color name="primary">#8B3A0F</color> <!-- Nâu đậm đặc trưng -->
     <color name="primary_dark">#6D2D0A</color>
-    <color name="primary_light">#B5612E</color>
-    <color name="accent">#E8845C</color>
-    <color name="accent_light">#F5A882</color>
+    <color name="accent">#E8845C</color> <!-- Cam SavorSmart -->
+    <color name="accent_light">#FDEAE0</color> <!-- Cam nhạt cho nền Insights -->
 
-    <!-- Background Colors -->
-    <color name="splash_bg">#F5F3F0</color>
-    <color name="background">#F7FAFD</color>
+    <!-- Backgrounds -->
+    <color name="background">#F8FAFC</color> <!-- Nền xám nhạt hiện đại -->
     <color name="surface">#FFFFFF</color>
-    <color name="card_bg">#FFFFFF</color>
 
     <!-- Text Colors -->
-    <color name="text_primary">#1A1A1A</color>
-    <color name="text_secondary">#757575</color>
-    <color name="text_hint">#BDBDBD</color>
-
-    <!-- UI Elements -->
-    <color name="badge_healthy">#E8F5E9</color>
-    <color name="text_healthy">#4CAF50</color>
-    <color name="badge_time">#F5F5F5</color>
-    <color name="nav_inactive">#9E9E9E</color>
-    <color name="orange_light">#FFF3E0</color>
-
-    <!-- Status Colors -->
-    <color name="success">#4CAF50</color>
-    <color name="error">#E53935</color>
-    <color name="warning">#FF9800</color>
-
-    <!-- Inventory Page -->
-    <color name="insights_bg">#FDEAE0</color>
-    <color name="badge_fresh">#4CAF50</color>
-    <color name="badge_use_soon">#FF9800</color>
-    <color name="badge_expired">#E53935</color>
-    <color name="fab_bg">#2E2E2E</color>
-    <color name="inventory_icon_green">#2E7D32</color>
-
-    <!-- Chef Assistant Chat -->
-    <color name="chat_bg">#F9F9F9</color>
-    <color name="chat_bubble_ai">#FFFFFF</color>
-    <color name="chat_bubble_user">#8B3A0F</color>
-    <color name="chat_input_bg">#F5F5F5</color>
-    <color name="user_avatar_bg">#EFEBE9</color>
+    <color name="text_primary">#1E293B</color>
+    <color name="text_secondary">#64748B</color>
 
     <!-- Profile Page -->
-    <color name="profile_green">#5D7A3A</color>
-    <color name="profile_menu_icon_bg">#FFF5EE</color>
-    <color name="divider">#E0E0E0</color>
+    <color name="profile_ring">#5D7A3A</color> <!-- Màu xanh ô liu của vòng Profile -->
+    <color name="profile_menu_icon">#8B3A0F</color>
+
+    <!-- Status Badges -->
+    <color name="status_fresh">#4CAF50</color>
+    <color name="status_use_soon">#FF9800</color>
+    <color name="status_expired">#EF4444</color>
+
+    <!-- Inventory specific -->
+    <color name="total_items_border">#E2E8F0</color>
+
+    <!-- Splash Background Color -->
+    <color name="splash_bg">#FCFAF7</color>
+
+    <!-- Divider Color -->
+    <color name="divider">#E2E8F0</color>
+
+    <!-- Chat and UI Colors -->
+    <color name="chat_bg">#F1F5F9</color>
+    <color name="text_hint">#94A3B8</color>
+    <color name="success">#10B981</color>
+    <color name="error">#EF4444</color>
 </resources>

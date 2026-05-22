@@ -1,21 +1,39 @@
 package gun.edu.smartcooking;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipesFragment extends Fragment {
 
     private TextView chipAll, chipBreakfast, chipLunch, chipDinner, chipHealthy;
     private TextView[] chips;
-    private String selectedCategory = "All";
+    private RecyclerView rvRecipes;
+    private ProgressBar progressRecipes;
+    private LinearLayout layoutEmpty;
+
+    private RecipeAdapter recipeAdapter;
+    private List<Recipe> allRecipes = new ArrayList<>();
+    private List<Recipe> filteredRecipes = new ArrayList<>();
+    private String selectedCategory = "all";
 
     @Nullable
     @Override
@@ -29,40 +47,104 @@ public class RecipesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Khởi tạo các chip filter
+        // Khởi tạo views
         chipAll = view.findViewById(R.id.chipAll);
         chipBreakfast = view.findViewById(R.id.chipBreakfast);
         chipLunch = view.findViewById(R.id.chipLunch);
         chipDinner = view.findViewById(R.id.chipDinner);
         chipHealthy = view.findViewById(R.id.chipHealthy);
+        rvRecipes = view.findViewById(R.id.rvRecipes);
+        progressRecipes = view.findViewById(R.id.progressRecipes);
+        layoutEmpty = view.findViewById(R.id.layoutEmpty);
 
         chips = new TextView[] { chipAll, chipBreakfast, chipLunch, chipDinner, chipHealthy };
 
-        // Thiết lập sự kiện click cho các chip
+        // Setup RecyclerView
+        recipeAdapter = new RecipeAdapter(requireContext(), filteredRecipes);
+        rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvRecipes.setAdapter(recipeAdapter);
+
+        // Click listener cho recipe card
+        recipeAdapter.setOnRecipeClickListener(recipe -> {
+            Intent intent = new Intent(getActivity(), RecipeDetailActivity.class);
+            intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_ID, recipe.getId());
+            startActivity(intent);
+        });
+
+        // Favorite listener
+        recipeAdapter.setOnFavoriteClickListener((recipe, position) -> {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) {
+                Toast.makeText(getContext(), "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            FirebaseHelper.getInstance().toggleFavorite(user.getUid(), recipe.getId(), isFav -> {
+                recipe.setFavorite(isFav);
+                recipeAdapter.notifyItemChanged(position);
+                Toast.makeText(getContext(),
+                        isFav ? "Đã thêm vào yêu thích ❤️" : "Đã bỏ yêu thích",
+                        Toast.LENGTH_SHORT).show();
+            });
+        });
+
+        // Chip click listeners
         for (TextView chip : chips) {
             chip.setOnClickListener(v -> selectChip((TextView) v));
         }
 
-        // Thiết lập sự kiện click cho các card
-        View cardFeatured = view.findViewById(R.id.cardFeatured);
-        View cardRecipe2 = view.findViewById(R.id.cardRecipe2);
-        View cardRecipe3 = view.findViewById(R.id.cardRecipe3);
+        // Load recipes từ Firebase
+        loadRecipes();
+    }
 
-        cardFeatured.setOnClickListener(
-                v -> Toast.makeText(getContext(), "Vibrant Quinoa Power Bowl", Toast.LENGTH_SHORT).show());
-        cardRecipe2.setOnClickListener(
-                v -> Toast.makeText(getContext(), "Spring Greens & Egg Salad", Toast.LENGTH_SHORT).show());
-        cardRecipe3.setOnClickListener(
-                v -> Toast.makeText(getContext(), "Rustic Margherita Pizza", Toast.LENGTH_SHORT).show());
+    /**
+     * Load tất cả recipes từ Firebase
+     */
+    private void loadRecipes() {
+        progressRecipes.setVisibility(View.VISIBLE);
+        layoutEmpty.setVisibility(View.GONE);
 
-        // Thiết lập sự kiện yêu thích
-        View btnFav2 = view.findViewById(R.id.btnFavorite2);
-        View btnFav3 = view.findViewById(R.id.btnFavorite3);
+        FirebaseHelper.getInstance().getAllRecipes(new FirebaseHelper.RecipeListCallback() {
+            @Override
+            public void onRecipesLoaded(List<Recipe> recipes) {
+                if (!isAdded()) return;
 
-        btnFav2.setOnClickListener(
-                v -> Toast.makeText(getContext(), "Đã thêm vào yêu thích!", Toast.LENGTH_SHORT).show());
-        btnFav3.setOnClickListener(
-                v -> Toast.makeText(getContext(), "Đã thêm vào yêu thích!", Toast.LENGTH_SHORT).show());
+                progressRecipes.setVisibility(View.GONE);
+                allRecipes.clear();
+                allRecipes.addAll(recipes);
+                filterRecipes();
+            }
+
+            @Override
+            public void onError(String error) {
+                if (!isAdded()) return;
+                progressRecipes.setVisibility(View.GONE);
+                layoutEmpty.setVisibility(View.VISIBLE);
+                Toast.makeText(getContext(), "Lỗi tải dữ liệu: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     * Lọc recipes theo category đã chọn
+     */
+    private void filterRecipes() {
+        filteredRecipes.clear();
+
+        if (selectedCategory.equals("all")) {
+            filteredRecipes.addAll(allRecipes);
+        } else {
+            for (Recipe recipe : allRecipes) {
+                if (recipe.getCategory() != null && recipe.getCategory().equals(selectedCategory)) {
+                    filteredRecipes.add(recipe);
+                }
+            }
+        }
+
+        recipeAdapter.notifyDataSetChanged();
+
+        // Hiện empty state nếu không có kết quả
+        layoutEmpty.setVisibility(filteredRecipes.isEmpty() ? View.VISIBLE : View.GONE);
+        rvRecipes.setVisibility(filteredRecipes.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
     /**
@@ -73,14 +155,19 @@ public class RecipesFragment extends Fragment {
             if (chip == selected) {
                 chip.setBackgroundResource(R.drawable.bg_chip_selected);
                 chip.setTextColor(getResources().getColor(R.color.text_primary, null));
-                selectedCategory = chip.getText().toString();
             } else {
                 chip.setBackgroundResource(R.drawable.bg_chip_unselected);
                 chip.setTextColor(getResources().getColor(R.color.text_secondary, null));
             }
         }
 
-        // Hiển thị thông báo lọc
-        Toast.makeText(getContext(), "Lọc: " + selectedCategory, Toast.LENGTH_SHORT).show();
+        // Map chip to category
+        if (selected == chipAll) selectedCategory = "all";
+        else if (selected == chipBreakfast) selectedCategory = "breakfast";
+        else if (selected == chipLunch) selectedCategory = "lunch";
+        else if (selected == chipDinner) selectedCategory = "dinner";
+        else if (selected == chipHealthy) selectedCategory = "healthy";
+
+        filterRecipes();
     }
 }
