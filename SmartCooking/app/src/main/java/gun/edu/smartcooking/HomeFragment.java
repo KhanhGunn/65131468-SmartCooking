@@ -74,9 +74,17 @@ public class HomeFragment extends Fragment {
                 if (recipes.size() > 0) {
                     Recipe featured = recipes.get(0);
                     ImageView ivFeatured = view.findViewById(R.id.ivFeaturedImage);
+                    TextView tvFeaturedName = view.findViewById(R.id.tvFeaturedName);
+                    TextView tvFeaturedDesc = view.findViewById(R.id.tvFeaturedDesc);
                     if (ivFeatured != null) {
                         featured.displayImage(requireContext(), ivFeatured);
                         ivFeatured.setBackground(null);
+                    }
+                    if (tvFeaturedName != null) {
+                        tvFeaturedName.setText(featured.getName());
+                    }
+                    if (tvFeaturedDesc != null) {
+                        tvFeaturedDesc.setText(featured.getDescription());
                     }
 
                     // Card click → mở chi tiết
@@ -124,7 +132,30 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
-                // Suggestion card
+                // Plan Recipe (Today's Plan - Quinoa Power Bowl, typically index 3)
+                if (recipes.size() > 3) {
+                    Recipe planRecipe = recipes.get(3);
+                    ImageView ivPlan = view.findViewById(R.id.ivPlanImage);
+                    TextView tvPlanName = view.findViewById(R.id.tvPlanName);
+                    View cardTodayPlan = view.findViewById(R.id.cardTodayPlan);
+                    View btnStartPrep = view.findViewById(R.id.btnStartPrep);
+
+                    if (ivPlan != null) {
+                        planRecipe.displayImage(requireContext(), ivPlan);
+                        ivPlan.setBackground(null);
+                    }
+                    if (tvPlanName != null) {
+                        tvPlanName.setText(planRecipe.getName());
+                    }
+                    if (cardTodayPlan != null) {
+                        cardTodayPlan.setOnClickListener(v -> openRecipeDetail(planRecipe.getId()));
+                    }
+                    if (btnStartPrep != null) {
+                        btnStartPrep.setOnClickListener(v -> openRecipeDetail(planRecipe.getId()));
+                    }
+                }
+
+                // Suggestion card (Using index 3 as well or index 0 for fallback)
                 if (recipes.size() > 3) {
                     Recipe suggestion = recipes.get(3);
                     View cardSuggestion = view.findViewById(R.id.cardSuggestion);

@@ -203,6 +203,30 @@ public class FirebaseHelper {
                 });
     }
 
+    /**
+     * Lấy toàn bộ danh sách ID các món ăn yêu thích của user
+     */
+    public void getUserFavorites(String uid, final FavoritesListCallback callback) {
+        usersRef.child(uid).child("favorites").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> favoriteIds = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Boolean isFav = ds.getValue(Boolean.class);
+                    if (Boolean.TRUE.equals(isFav)) {
+                        favoriteIds.add(ds.getKey());
+                    }
+                }
+                callback.onFavoritesLoaded(favoriteIds);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onError(error.getMessage());
+            }
+        });
+    }
+
     // ==================== SEED DATA ====================
 
     /**
@@ -381,5 +405,10 @@ public class FirebaseHelper {
 
     public interface FavoriteCheckCallback {
         void onResult(boolean isFavorite);
+    }
+
+    public interface FavoritesListCallback {
+        void onFavoritesLoaded(List<String> favoriteIds);
+        void onError(String error);
     }
 }

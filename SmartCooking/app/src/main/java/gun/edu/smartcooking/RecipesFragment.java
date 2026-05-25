@@ -92,12 +92,21 @@ public class RecipesFragment extends Fragment {
             chip.setOnClickListener(v -> selectChip((TextView) v));
         }
 
+        Bundle args = getArguments();
+        if (args != null && args.getBoolean("show_favorites_only", false)) {
+            selectedCategory = "favorites";
+            for (TextView chip : chips) {
+                chip.setBackgroundResource(R.drawable.bg_chip_unselected);
+                chip.setTextColor(getResources().getColor(R.color.text_secondary, null));
+            }
+        }
+
         // Load recipes từ Firebase
         loadRecipes();
     }
 
     /**
-     * Load tất cả recipes từ Firebase
+     * Load tất cả recipes từ Firebase và đồng bộ trạng thái yêu thích
      */
     private void loadRecipes() {
         progressRecipes.setVisibility(View.VISIBLE);
@@ -108,10 +117,34 @@ public class RecipesFragment extends Fragment {
             public void onRecipesLoaded(List<Recipe> recipes) {
                 if (!isAdded()) return;
 
-                progressRecipes.setVisibility(View.GONE);
                 allRecipes.clear();
                 allRecipes.addAll(recipes);
-                filterRecipes();
+
+                // Fetch actual favorites of the logged-in user to set the dynamic heart states
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    FirebaseHelper.getInstance().getUserFavorites(user.getUid(), new FirebaseHelper.FavoritesListCallback() {
+                        @Override
+                        public void onFavoritesLoaded(List<String> favoriteIds) {
+                            if (!isAdded()) return;
+                            progressRecipes.setVisibility(View.GONE);
+                            for (Recipe recipe : allRecipes) {
+                                recipe.setFavorite(favoriteIds.contains(recipe.getId()));
+                            }
+                            filterRecipes();
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            if (!isAdded()) return;
+                            progressRecipes.setVisibility(View.GONE);
+                            filterRecipes();
+                        }
+                    });
+                } else {
+                    progressRecipes.setVisibility(View.GONE);
+                    filterRecipes();
+                }
             }
 
             @Override
@@ -125,13 +158,19 @@ public class RecipesFragment extends Fragment {
     }
 
     /**
-     * Lọc recipes theo category đã chọn
+     * Lọc recipes theo category hoặc yêu thích đã chọn
      */
     private void filterRecipes() {
         filteredRecipes.clear();
 
         if (selectedCategory.equals("all")) {
             filteredRecipes.addAll(allRecipes);
+        } else if (selectedCategory.equals("favorites")) {
+            for (Recipe recipe : allRecipes) {
+                if (recipe.isFavorite()) {
+                    filteredRecipes.add(recipe);
+                }
+            }
         } else {
             for (Recipe recipe : allRecipes) {
                 if (recipe.getCategory() != null && recipe.getCategory().equals(selectedCategory)) {

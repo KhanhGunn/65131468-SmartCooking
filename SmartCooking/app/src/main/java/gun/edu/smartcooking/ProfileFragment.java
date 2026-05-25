@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -20,8 +21,8 @@ public class ProfileFragment extends Fragment {
 
     private LinearLayout menuMyRecipes, menuCookingHistory, menuSubscribedPlans;
     private LinearLayout menuAccountSettings, menuHelpSupport;
-    private LinearLayout btnLogout;
-    private TextView tvProfileName, tvProfileBio;
+    private TextView btnLogout; // Sử dụng TextView để khớp với XML mới
+    private TextView tvProfileName, tvProfileBio, tvRecipesCount, tvFollowersCount, tvLevel;
 
     @Nullable
     @Override
@@ -35,81 +36,80 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Ánh xạ các view
+        // Ánh xạ các view theo đúng ID và kiểu dữ liệu trong layout mới
         menuMyRecipes = view.findViewById(R.id.menuMyRecipes);
         menuCookingHistory = view.findViewById(R.id.menuCookingHistory);
         menuSubscribedPlans = view.findViewById(R.id.menuSubscribedPlans);
         menuAccountSettings = view.findViewById(R.id.menuAccountSettings);
         menuHelpSupport = view.findViewById(R.id.menuHelpSupport);
         btnLogout = view.findViewById(R.id.btnLogout);
+        
         tvProfileName = view.findViewById(R.id.tvProfileName);
         tvProfileBio = view.findViewById(R.id.tvProfileBio);
+        tvRecipesCount = view.findViewById(R.id.tvRecipesCount);
+        tvFollowersCount = view.findViewById(R.id.tvFollowersCount);
+        tvLevel = view.findViewById(R.id.tvLevel);
 
-        // Cập nhật thông tin user từ Firebase
+        // Cập nhật thông tin người dùng từ Firebase
         updateUserInfo();
 
-        // Thiết lập sự kiện click cho các menu
+        // Thiết lập sự kiện click
         setupMenuClickListeners();
     }
 
-    /**
-     * Cập nhật thông tin user từ Firebase Auth
-     */
     private void updateUserInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            // Hiển thị tên
             if (user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
                 tvProfileName.setText(user.getDisplayName());
             } else {
-                tvProfileName.setText("Smart Chef");
+                tvProfileName.setText("Đầu bếp SavorSmart");
             }
 
-            // Hiển thị email trong bio
             if (user.getEmail() != null) {
                 tvProfileBio.setText(user.getEmail());
             }
         }
     }
 
-    /**
-     * Thiết lập sự kiện click cho tất cả các mục menu
-     */
     private void setupMenuClickListeners() {
-        menuMyRecipes.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Công thức của tôi", Toast.LENGTH_SHORT).show()
-        );
+        if (menuMyRecipes != null) {
+            menuMyRecipes.setOnClickListener(v -> {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).navigateToRecipes(true);
+                }
+            });
+        }
 
-        menuCookingHistory.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Lịch sử nấu ăn", Toast.LENGTH_SHORT).show()
-        );
+        // Các tính năng đang phát triển sử dụng Dialog chuyên nghiệp
+        View.OnClickListener devToast = v -> {
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Thông báo")
+                    .setMessage("Tính năng này đang được phát triển và sẽ sớm ra mắt trong bản cập nhật tới!")
+                    .setPositiveButton("Đã hiểu", null)
+                    .show();
+        };
 
-        menuSubscribedPlans.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Gói đăng ký", Toast.LENGTH_SHORT).show()
-        );
+        if (menuCookingHistory != null) menuCookingHistory.setOnClickListener(devToast);
+        if (menuSubscribedPlans != null) menuSubscribedPlans.setOnClickListener(devToast);
+        if (menuAccountSettings != null) menuAccountSettings.setOnClickListener(devToast);
+        if (menuHelpSupport != null) menuHelpSupport.setOnClickListener(devToast);
 
-        menuAccountSettings.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Cài đặt tài khoản", Toast.LENGTH_SHORT).show()
-        );
-
-        menuHelpSupport.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Trợ giúp & Hỗ trợ", Toast.LENGTH_SHORT).show()
-        );
-
-        // Nút đăng xuất - Firebase sign out
-        btnLogout.setOnClickListener(v -> {
-            // Đăng xuất Firebase
-            FirebaseAuth.getInstance().signOut();
-
-            Toast.makeText(getContext(), "Đã đăng xuất", Toast.LENGTH_SHORT).show();
-
-            // Chuyển về màn hình đăng nhập
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            if (getActivity() != null) {
-                getActivity().finish();
-            }
-        });
+        if (btnLogout != null) {
+            btnLogout.setOnClickListener(v -> {
+                new MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Đăng xuất")
+                        .setMessage("Bạn có chắc chắn muốn thoát khỏi ứng dụng SavorSmart?")
+                        .setPositiveButton("Đăng xuất", (dialog, which) -> {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            if (getActivity() != null) getActivity().finish();
+                        })
+                        .setNegativeButton("Hủy", null)
+                        .show();
+            });
+        }
     }
 }

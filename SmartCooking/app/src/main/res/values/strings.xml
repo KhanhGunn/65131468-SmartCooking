@@ -27,6 +27,13 @@
     <string name="btn_register">Đăng ký ngay ➔</string>
     <string name="already_have_account">Already have an account? Đăng nhập</string>
 
+    <!-- Bottom Navigation Tabs -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_recipes">Công thức</string>
+    <string name="nav_assistant">Trợ lý AI</string>
+    <string name="nav_inventory">Tủ lạnh</string>
+    <string name="nav_profile">Cá nhân</string>
+
     <!-- Home/Recipes Screen -->
     <string name="greeting_user">Chào Maria! 👋</string>
     <string name="home_subtitle">Let\'s see what\'s cooking today.</string>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/white" />
-    <corners android:topLeftRadius="24dp" android:topRightRadius="24dp" />
+    <solid android:color="@color/surface" />
+    <!-- Phẳng hoàn toàn ở dưới, chỉ bo nhẹ ở trên để tạo sự hiện đại -->
+    <corners
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp" />
 </shape>

@@ -91,6 +91,16 @@ public class ChefAssistantFragment extends Fragment {
         View btnMic = view.findViewById(R.id.btnMic);
         btnMic.setOnClickListener(v ->
                 Toast.makeText(getContext(), "Nhập giọng nói", Toast.LENGTH_SHORT).show());
+
+        // Kiểm tra xem có auto_query được truyền từ tủ lạnh sang không
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("auto_query")) {
+            String autoQuery = args.getString("auto_query");
+            if (autoQuery != null && !autoQuery.isEmpty()) {
+                view.postDelayed(() -> sendSuggestion(autoQuery), 350);
+                args.remove("auto_query"); // Tránh gửi lại khi xoay màn hình
+            }
+        }
     }
 
     /**

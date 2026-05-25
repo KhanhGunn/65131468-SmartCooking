@@ -3,7 +3,8 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
+    <!-- Sleek minimalist outline home -->
     <path
-        android:fillColor="#000000"
-        android:pathData="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        android:fillColor="#FF000000"
+        android:pathData="M19,9.3V20a1,1 0,0 1,-1 1H6a1,1 0,0 1,-1 -1V9.3a1,1 0,0 1,0.35 -0.76l6.5,-5.5a1,1 0,0 1,1.3 0l6.5,5.5A1,1 0,0 1,19 9.3z M17,9.78L12,5.55L7,9.78V19h3v-5a1,1 0,0 1,1 -1h2a1,1 0,0 1,1 1v5h3V9.78z" />
 </vector>
