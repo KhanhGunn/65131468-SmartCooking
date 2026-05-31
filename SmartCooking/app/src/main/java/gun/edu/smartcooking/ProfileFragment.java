@@ -21,7 +21,7 @@ public class ProfileFragment extends Fragment {
 
     private LinearLayout menuMyRecipes, menuCookingHistory, menuSubscribedPlans;
     private LinearLayout menuAccountSettings, menuHelpSupport;
-    private TextView btnLogout; // Sử dụng TextView để khớp với XML mới
+    private View btnLogout; // Khai báo dạng View để tránh ClassCastException với LinearLayout trong XML
     private TextView tvProfileName, tvProfileBio, tvRecipesCount, tvFollowersCount, tvLevel;
 
     @Nullable

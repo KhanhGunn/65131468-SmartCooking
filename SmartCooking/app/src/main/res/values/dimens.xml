@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SmartCooking — Design Token System            -->
+    <!--  Base unit: 4dp                                -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- ─── Spacing (4dp base) ─── -->
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_sm">8dp</dimen>
+    <dimen name="space_md">12dp</dimen>
+    <dimen name="space_base">16dp</dimen>
+    <dimen name="space_lg">20dp</dimen>
+    <dimen name="space_xl">24dp</dimen>
+    <dimen name="space_2xl">32dp</dimen>
+    <dimen name="space_3xl">40dp</dimen>
+    <dimen name="space_4xl">48dp</dimen>
+    <dimen name="space_5xl">56dp</dimen>
+    <dimen name="space_6xl">64dp</dimen>
+
+    <!-- ─── Corner Radius ─── -->
+    <dimen name="radius_xs">8dp</dimen>
+    <dimen name="radius_sm">12dp</dimen>
+    <dimen name="radius_md">16dp</dimen>
+    <dimen name="radius_lg">20dp</dimen>
+    <dimen name="radius_xl">24dp</dimen>
+    <dimen name="radius_2xl">28dp</dimen>
+    <dimen name="radius_full">100dp</dimen>
+
+    <!-- ─── Elevation ─── -->
+    <dimen name="elevation_none">0dp</dimen>
+    <dimen name="elevation_xs">1dp</dimen>
+    <dimen name="elevation_sm">2dp</dimen>
+    <dimen name="elevation_md">4dp</dimen>
+    <dimen name="elevation_lg">8dp</dimen>
+    <dimen name="elevation_xl">12dp</dimen>
+
+    <!-- ─── Typography Sizes ─── -->
+    <dimen name="text_display">32sp</dimen>
+    <dimen name="text_h1">26sp</dimen>
+    <dimen name="text_h2">20sp</dimen>
+    <dimen name="text_h3">17sp</dimen>
+    <dimen name="text_body_lg">16sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_label">13sp</dimen>
+    <dimen name="text_caption">12sp</dimen>
+    <dimen name="text_micro">11sp</dimen>
+
+    <!-- ─── Component Sizes ─── -->
+    <!-- Buttons -->
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="button_height_sm">40dp</dimen>
+    <dimen name="button_height_xs">36dp</dimen>
+    <dimen name="button_icon_size">20dp</dimen>
+
+    <!-- Input Fields -->
+    <dimen name="input_height">56dp</dimen>
+    <dimen name="input_height_sm">48dp</dimen>
+
+    <!-- Avatars -->
+    <dimen name="avatar_xl">96dp</dimen>
+    <dimen name="avatar_lg">64dp</dimen>
+    <dimen name="avatar_md">48dp</dimen>
+    <dimen name="avatar_sm">40dp</dimen>
+    <dimen name="avatar_xs">32dp</dimen>
+
+    <!-- Icons -->
+    <dimen name="icon_xl">48dp</dimen>
+    <dimen name="icon_lg">32dp</dimen>
+    <dimen name="icon_md">24dp</dimen>
+    <dimen name="icon_sm">20dp</dimen>
+    <dimen name="icon_xs">16dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="card_image_height_lg">260dp</dimen>
+    <dimen name="card_image_height_md">180dp</dimen>
+    <dimen name="card_image_height_sm">140dp</dimen>
+    <dimen name="card_image_height_xs">120dp</dimen>
+
+    <!-- Navigation -->
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="nav_padding_bottom">100dp</dimen>
+
+    <!-- Header -->
+    <dimen name="detail_header_height">320dp</dimen>
+    <dimen name="splash_logo_size">120dp</dimen>
+    <dimen name="splash_logo_icon">64dp</dimen>
+
+    <!-- Chat -->
+    <dimen name="chat_input_min_height">48dp</dimen>
+    <dimen name="chat_send_button_size">48dp</dimen>
+    <dimen name="chat_bubble_max_width">280dp</dimen>
+    <dimen name="chat_avatar_size">32dp</dimen>
+
+    <!-- Chip -->
+    <dimen name="chip_height">40dp</dimen>
+    <dimen name="chip_padding_h">16dp</dimen>
+
+    <!-- Profile -->
+    <dimen name="profile_avatar_size">96dp</dimen>
+    <dimen name="profile_ring_size">108dp</dimen>
+    <dimen name="profile_menu_icon">36dp</dimen>
+    <dimen name="profile_menu_height">56dp</dimen>
+
+    <!-- Page Padding -->
+    <dimen name="page_padding">20dp</dimen>
+    <dimen name="page_padding_sm">16dp</dimen>
+</resources>

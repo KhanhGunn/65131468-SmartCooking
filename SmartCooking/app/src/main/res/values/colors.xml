@@ -1,43 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  SmartCooking — "Warm Culinary" Color System   -->
+    <!--  Design: Material 3 + Glassmorphism Hybrid     -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Core Brand -->
+    <color name="primary">#D4621A</color>          <!-- Warm Orange-Brown -->
+    <color name="primary_dark">#B8520F</color>
+    <color name="primary_light">#F5DBC8</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <color name="secondary">#2D6A4F</color>         <!-- Forest Green -->
+    <color name="secondary_light">#D8F3DC</color>
+    <color name="on_secondary">#FFFFFF</color>
+
+    <color name="tertiary">#E9C46A</color>          <!-- Golden Accent -->
+    <color name="tertiary_light">#FFF8E7</color>
+
+    <!-- Surfaces & Backgrounds -->
+    <color name="background">#FBF8F4</color>        <!-- Warm Off-White -->
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F5F1ED</color>   <!-- Warm Gray -->
+    <color name="surface_elevated">#FFFFFF</color>
+    <color name="surface_container">#F0ECE7</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1A2E</color>      <!-- Deep Navy-Black -->
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_hint">#9CA3AF</color>
+    <color name="text_disabled">#D1D5DB</color>
+    <color name="text_on_dark">#FFFFFF</color>
+    <color name="text_on_dark_secondary">#E0E0E0</color>
+
+    <!-- Status / Semantic -->
+    <color name="status_fresh">#059669</color>
+    <color name="status_fresh_bg">#D1FAE5</color>
+    <color name="status_warning">#D97706</color>
+    <color name="status_warning_bg">#FEF3C7</color>
+    <color name="status_error">#DC2626</color>
+    <color name="status_error_bg">#FEE2E2</color>
+    <color name="success">#059669</color>
+    <color name="error">#DC2626</color>
+
+    <!-- Gradient -->
+    <color name="gradient_start">#D4621A</color>
+    <color name="gradient_end">#E9984A</color>
+    <color name="gradient_warm_start">#D4621A</color>
+    <color name="gradient_warm_mid">#E07B3A</color>
+    <color name="gradient_warm_end">#F5C28A</color>
+
+    <!-- Splash -->
+    <color name="splash_bg">#FBF8F4</color>
+    <color name="splash_gradient_start">#D4621A</color>
+    <color name="splash_gradient_end">#F5DBC8</color>
+
+    <!-- Chat -->
+    <color name="chat_bg">#F5F1ED</color>
+    <color name="chat_bubble_ai">#FFFFFF</color>
+    <color name="chat_bubble_ai_border">#E8E3DD</color>
+    <color name="chat_bubble_user_start">#D4621A</color>
+    <color name="chat_bubble_user_end">#E9984A</color>
+
+    <!-- Dividers & Borders -->
+    <color name="divider">#E8E3DD</color>
+    <color name="border">#E0DCD6</color>
+    <color name="border_light">#F0ECE7</color>
+
+    <!-- Bottom Navigation -->
+    <color name="nav_active">#D4621A</color>
+    <color name="nav_inactive">#9CA3AF</color>
+    <color name="nav_background">#FFFFFF</color>
+
+    <!-- Overlay & Glass -->
+    <color name="overlay_dark">#801A1A2E</color>       <!-- 50% opacity -->
+    <color name="overlay_light">#B3FFFFFF</color>       <!-- 70% opacity -->
+    <color name="glass_bg">#CCF5F1ED</color>            <!-- 80% opacity -->
+    <color name="glass_border">#40FFFFFF</color>
+
+    <!-- Shimmer / Loading -->
+    <color name="shimmer_base">#F0ECE7</color>
+    <color name="shimmer_highlight">#FDFCFA</color>
+
+    <!-- Rating -->
+    <color name="star_gold">#F59E0B</color>
+
+    <!-- Misc (keeping for backwards compat) -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <!-- SmartCooking Brand Colors -->
-    <color name="primary">#8B3A0F</color> <!-- Nâu đậm đặc trưng -->
-    <color name="primary_dark">#6D2D0A</color>
-    <color name="accent">#E8845C</color> <!-- Cam SavorSmart -->
-    <color name="accent_light">#FDEAE0</color> <!-- Cam nhạt cho nền Insights -->
-
-    <!-- Backgrounds -->
-    <color name="background">#F8FAFC</color> <!-- Nền xám nhạt hiện đại -->
-    <color name="surface">#FFFFFF</color>
-
-    <!-- Text Colors -->
-    <color name="text_primary">#1E293B</color>
-    <color name="text_secondary">#64748B</color>
-
-    <!-- Profile Page -->
-    <color name="profile_ring">#5D7A3A</color> <!-- Màu xanh ô liu của vòng Profile -->
-    <color name="profile_menu_icon">#8B3A0F</color>
-
-    <!-- Status Badges -->
-    <color name="status_fresh">#4CAF50</color>
-    <color name="status_use_soon">#FF9800</color>
-    <color name="status_expired">#EF4444</color>
-
-    <!-- Inventory specific -->
-    <color name="total_items_border">#E2E8F0</color>
-
-    <!-- Splash Background Color -->
-    <color name="splash_bg">#FCFAF7</color>
-
-    <!-- Divider Color -->
-    <color name="divider">#E2E8F0</color>
-
-    <!-- Chat and UI Colors -->
-    <color name="chat_bg">#F1F5F9</color>
-    <color name="text_hint">#94A3B8</color>
-    <color name="success">#10B981</color>
-    <color name="error">#EF4444</color>
+    <color name="accent">@color/primary</color>
+    <color name="accent_light">@color/primary_light</color>
+    <color name="profile_ring">@color/secondary</color>
+    <color name="profile_menu_icon">@color/primary</color>
+    <color name="total_items_border">@color/border</color>
+    <color name="status_use_soon">@color/status_warning</color>
+    <color name="status_expired">@color/status_error</color>
 </resources>

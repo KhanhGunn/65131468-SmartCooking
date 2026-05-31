@@ -31,7 +31,7 @@ public class FirebaseHelper {
     private final DatabaseReference inventoryRef;
 
     private FirebaseHelper() {
-        rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef = FirebaseDatabase.getInstance("https://android-projects-cae81-default-rtdb.firebaseio.com/").getReference();
         recipesRef = rootRef.child("recipes");
         usersRef = rootRef.child("users");
         inventoryRef = rootRef.child("inventory");
