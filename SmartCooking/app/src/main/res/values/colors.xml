@@ -1,98 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ═══════════════════════════════════════════════ -->
-    <!--  SmartCooking — "Warm Culinary" Color System   -->
-    <!--  Design: Material 3 + Glassmorphism Hybrid     -->
-    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Brand Colors - Hệ màu SavorSmart Modern -->
+    <color name="primary">#FF6B35</color>
+    <color name="primary_variant">#E85A2A</color>
+    <color name="primary_light">#FFF1EB</color>
+    <color name="secondary">#FFB347</color>
 
-    <!-- Core Brand -->
-    <color name="primary">#D4621A</color>          <!-- Warm Orange-Brown -->
-    <color name="primary_dark">#B8520F</color>
-    <color name="primary_light">#F5DBC8</color>
-    <color name="on_primary">#FFFFFF</color>
-
-    <color name="secondary">#2D6A4F</color>         <!-- Forest Green -->
-    <color name="secondary_light">#D8F3DC</color>
-    <color name="on_secondary">#FFFFFF</color>
-
-    <color name="tertiary">#E9C46A</color>          <!-- Golden Accent -->
-    <color name="tertiary_light">#FFF8E7</color>
-
-    <!-- Surfaces & Backgrounds -->
-    <color name="background">#FBF8F4</color>        <!-- Warm Off-White -->
+    <!-- Background & Surfaces -->
+    <color name="background">#FFF8F2</color>
     <color name="surface">#FFFFFF</color>
-    <color name="surface_variant">#F5F1ED</color>   <!-- Warm Gray -->
-    <color name="surface_elevated">#FFFFFF</color>
-    <color name="surface_container">#F0ECE7</color>
+    <color name="splash_bg">#FFF8F2</color>
 
-    <!-- Text -->
-    <color name="text_primary">#1A1A2E</color>      <!-- Deep Navy-Black -->
-    <color name="text_secondary">#6B7280</color>
-    <color name="text_hint">#9CA3AF</color>
-    <color name="text_disabled">#D1D5DB</color>
-    <color name="text_on_dark">#FFFFFF</color>
-    <color name="text_on_dark_secondary">#E0E0E0</color>
+    <!-- Typography -->
+    <color name="text_primary">#1E1E1E</color>
+    <color name="text_secondary">#636E72</color>
+    <color name="text_hint">#B2BEC3</color>
 
-    <!-- Status / Semantic -->
-    <color name="status_fresh">#059669</color>
-    <color name="status_fresh_bg">#D1FAE5</color>
-    <color name="status_warning">#D97706</color>
-    <color name="status_warning_bg">#FEF3C7</color>
-    <color name="status_error">#DC2626</color>
-    <color name="status_error_bg">#FEE2E2</color>
-    <color name="success">#059669</color>
-    <color name="error">#DC2626</color>
+    <!-- Semantic / Status -->
+    <color name="success">#2E7D32</color>
+    <color name="warning">#F57C00</color>
+    <color name="error">#D32F2F</color>
+    <color name="status_fresh">#2E7D32</color>
 
-    <!-- Gradient -->
-    <color name="gradient_start">#D4621A</color>
-    <color name="gradient_end">#E9984A</color>
-    <color name="gradient_warm_start">#D4621A</color>
-    <color name="gradient_warm_mid">#E07B3A</color>
-    <color name="gradient_warm_end">#F5C28A</color>
+    <!-- UI Helpers -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="divider">#F1E6D8</color>
+    <color name="nav_active">#FF6B35</color>
+    <color name="nav_inactive">#B2BEC3</color>
+    <color name="profile_ring">#5D7A3A</color>
 
-    <!-- Splash -->
-    <color name="splash_bg">#FBF8F4</color>
-    <color name="splash_gradient_start">#D4621A</color>
-    <color name="splash_gradient_end">#F5DBC8</color>
+    <!-- Aliases for Compatibility -->
+    <color name="accent">#FF6B35</color>
+    <color name="accent_light">#FFF1EB</color>
 
-    <!-- Chat -->
-    <color name="chat_bg">#F5F1ED</color>
-    <color name="chat_bubble_ai">#FFFFFF</color>
-    <color name="chat_bubble_ai_border">#E8E3DD</color>
-    <color name="chat_bubble_user_start">#D4621A</color>
-    <color name="chat_bubble_user_end">#E9984A</color>
-
-    <!-- Dividers & Borders -->
-    <color name="divider">#E8E3DD</color>
-    <color name="border">#E0DCD6</color>
-    <color name="border_light">#F0ECE7</color>
-
-    <!-- Bottom Navigation -->
-    <color name="nav_active">#D4621A</color>
-    <color name="nav_inactive">#9CA3AF</color>
-    <color name="nav_background">#FFFFFF</color>
-
-    <!-- Overlay & Glass -->
-    <color name="overlay_dark">#801A1A2E</color>       <!-- 50% opacity -->
-    <color name="overlay_light">#B3FFFFFF</color>       <!-- 70% opacity -->
-    <color name="glass_bg">#CCF5F1ED</color>            <!-- 80% opacity -->
-    <color name="glass_border">#40FFFFFF</color>
-
-    <!-- Shimmer / Loading -->
-    <color name="shimmer_base">#F0ECE7</color>
-    <color name="shimmer_highlight">#FDFCFA</color>
-
-    <!-- Rating -->
-    <color name="star_gold">#F59E0B</color>
-
-    <!-- Misc (keeping for backwards compat) -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="accent">@color/primary</color>
-    <color name="accent_light">@color/primary_light</color>
-    <color name="profile_ring">@color/secondary</color>
-    <color name="profile_menu_icon">@color/primary</color>
-    <color name="total_items_border">@color/border</color>
-    <color name="status_use_soon">@color/status_warning</color>
-    <color name="status_expired">@color/status_error</color>
+    <!-- Chat background -->
+    <color name="chat_bg">#FFF8F2</color>
 </resources>

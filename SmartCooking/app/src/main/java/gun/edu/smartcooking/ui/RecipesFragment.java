@@ -1,12 +1,10 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,13 +19,16 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import gun.edu.smartcooking.R;
+import gun.edu.smartcooking.adapter.RecipeAdapter;
+import gun.edu.smartcooking.databinding.FragmentRecipesBinding;
+import gun.edu.smartcooking.firebase.FirebaseHelper;
+import gun.edu.smartcooking.model.Recipe;
+
 public class RecipesFragment extends Fragment {
 
-    private TextView chipAll, chipBreakfast, chipLunch, chipDinner, chipHealthy;
+    private FragmentRecipesBinding binding;
     private TextView[] chips;
-    private RecyclerView rvRecipes;
-    private ProgressBar progressRecipes;
-    private LinearLayout layoutEmpty;
 
     private RecipeAdapter recipeAdapter;
     private List<Recipe> allRecipes = new ArrayList<>();
@@ -38,40 +38,34 @@ public class RecipesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-            @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recipes, container, false);
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        binding = FragmentRecipesBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Khởi tạo views
-        chipAll = view.findViewById(R.id.chipAll);
-        chipBreakfast = view.findViewById(R.id.chipBreakfast);
-        chipLunch = view.findViewById(R.id.chipLunch);
-        chipDinner = view.findViewById(R.id.chipDinner);
-        chipHealthy = view.findViewById(R.id.chipHealthy);
-        rvRecipes = view.findViewById(R.id.rvRecipes);
-        progressRecipes = view.findViewById(R.id.progressRecipes);
-        layoutEmpty = view.findViewById(R.id.layoutEmpty);
+        chips = new TextView[] { 
+                binding.chipAll, 
+                binding.chipBreakfast, 
+                binding.chipLunch, 
+                binding.chipDinner, 
+                binding.chipHealthy 
+        };
 
-        chips = new TextView[] { chipAll, chipBreakfast, chipLunch, chipDinner, chipHealthy };
-
-        // Setup RecyclerView
         recipeAdapter = new RecipeAdapter(requireContext(), filteredRecipes);
-        rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvRecipes.setAdapter(recipeAdapter);
+        binding.rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvRecipes.setAdapter(recipeAdapter);
 
-        // Click listener cho recipe card
         recipeAdapter.setOnRecipeClickListener(recipe -> {
             Intent intent = new Intent(getActivity(), RecipeDetailActivity.class);
             intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_ID, recipe.getId());
             startActivity(intent);
         });
 
-        // Favorite listener
         recipeAdapter.setOnFavoriteClickListener((recipe, position) -> {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user == null) {
@@ -87,7 +81,6 @@ public class RecipesFragment extends Fragment {
             });
         });
 
-        // Chip click listeners
         for (TextView chip : chips) {
             chip.setOnClickListener(v -> selectChip((TextView) v));
         }
@@ -101,33 +94,34 @@ public class RecipesFragment extends Fragment {
             }
         }
 
-        // Load recipes từ Firebase
+        binding.swipeRefreshRecipes.setColorSchemeColors(getResources().getColor(R.color.primary, null));
+        binding.swipeRefreshRecipes.setOnRefreshListener(this::loadRecipes);
+
         loadRecipes();
     }
 
-    /**
-     * Load tất cả recipes từ Firebase và đồng bộ trạng thái yêu thích
-     */
     private void loadRecipes() {
-        progressRecipes.setVisibility(View.VISIBLE);
-        layoutEmpty.setVisibility(View.GONE);
+        if (!binding.swipeRefreshRecipes.isRefreshing()) {
+            binding.progressRecipes.setVisibility(View.VISIBLE);
+        }
+        binding.layoutEmpty.setVisibility(View.GONE);
 
         FirebaseHelper.getInstance().getAllRecipes(new FirebaseHelper.RecipeListCallback() {
             @Override
             public void onRecipesLoaded(List<Recipe> recipes) {
                 if (!isAdded()) return;
+                binding.swipeRefreshRecipes.setRefreshing(false);
 
                 allRecipes.clear();
                 allRecipes.addAll(recipes);
 
-                // Fetch actual favorites of the logged-in user to set the dynamic heart states
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     FirebaseHelper.getInstance().getUserFavorites(user.getUid(), new FirebaseHelper.FavoritesListCallback() {
                         @Override
                         public void onFavoritesLoaded(List<String> favoriteIds) {
                             if (!isAdded()) return;
-                            progressRecipes.setVisibility(View.GONE);
+                            binding.progressRecipes.setVisibility(View.GONE);
                             for (Recipe recipe : allRecipes) {
                                 recipe.setFavorite(favoriteIds.contains(recipe.getId()));
                             }
@@ -137,12 +131,12 @@ public class RecipesFragment extends Fragment {
                         @Override
                         public void onError(String error) {
                             if (!isAdded()) return;
-                            progressRecipes.setVisibility(View.GONE);
+                            binding.progressRecipes.setVisibility(View.GONE);
                             filterRecipes();
                         }
                     });
                 } else {
-                    progressRecipes.setVisibility(View.GONE);
+                    binding.progressRecipes.setVisibility(View.GONE);
                     filterRecipes();
                 }
             }
@@ -150,16 +144,14 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onError(String error) {
                 if (!isAdded()) return;
-                progressRecipes.setVisibility(View.GONE);
-                layoutEmpty.setVisibility(View.VISIBLE);
+                binding.swipeRefreshRecipes.setRefreshing(false);
+                binding.progressRecipes.setVisibility(View.GONE);
+                binding.layoutEmpty.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Lỗi tải dữ liệu: " + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    /**
-     * Lọc recipes theo category hoặc yêu thích đã chọn
-     */
     private void filterRecipes() {
         filteredRecipes.clear();
 
@@ -181,32 +173,33 @@ public class RecipesFragment extends Fragment {
 
         recipeAdapter.notifyDataSetChanged();
 
-        // Hiện empty state nếu không có kết quả
-        layoutEmpty.setVisibility(filteredRecipes.isEmpty() ? View.VISIBLE : View.GONE);
-        rvRecipes.setVisibility(filteredRecipes.isEmpty() ? View.GONE : View.VISIBLE);
+        binding.layoutEmpty.setVisibility(filteredRecipes.isEmpty() ? View.VISIBLE : View.GONE);
+        binding.rvRecipes.setVisibility(filteredRecipes.isEmpty() ? View.GONE : View.VISIBLE);
     }
 
-    /**
-     * Xử lý khi chọn chip filter
-     */
     private void selectChip(TextView selected) {
         for (TextView chip : chips) {
             if (chip == selected) {
                 chip.setBackgroundResource(R.drawable.bg_chip_selected);
-                chip.setTextColor(getResources().getColor(R.color.text_primary, null));
+                chip.setTextColor(getResources().getColor(R.color.white, null));
             } else {
                 chip.setBackgroundResource(R.drawable.bg_chip_unselected);
                 chip.setTextColor(getResources().getColor(R.color.text_secondary, null));
             }
         }
 
-        // Map chip to category
-        if (selected == chipAll) selectedCategory = "all";
-        else if (selected == chipBreakfast) selectedCategory = "breakfast";
-        else if (selected == chipLunch) selectedCategory = "lunch";
-        else if (selected == chipDinner) selectedCategory = "dinner";
-        else if (selected == chipHealthy) selectedCategory = "healthy";
+        if (selected == binding.chipAll) selectedCategory = "all";
+        else if (selected == binding.chipBreakfast) selectedCategory = "breakfast";
+        else if (selected == binding.chipLunch) selectedCategory = "lunch";
+        else if (selected == binding.chipDinner) selectedCategory = "dinner";
+        else if (selected == binding.chipHealthy) selectedCategory = "healthy";
 
         filterRecipes();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

@@ -69,184 +69,71 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Vegetables Section -->
-            <RelativeLayout
+            <!-- Phân mục chính: Thực phẩm trong tủ lạnh -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Thực phẩm trong tủ lạnh"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp" />
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
-                <TextView
+                android:layout_marginTop="12dp">
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeRefreshInventory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvInventory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingBottom="80dp"
+                        android:clipToPadding="false" />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                <!-- Trạng thái trống (Empty State) -->
+                <LinearLayout
+                    android:id="@+id/layoutEmptyInventory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-bold"
-                    android:text="Vegetables"
-                    android:textColor="@color/text_primary"
-                    android:textSize="20sp" />
-                <TextView
-                    android:id="@+id/tvViewAllVegetables"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="View All"
-                    android:textColor="@color/accent"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="60dp"
+                    android:visibility="gone">
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:columnCount="2"
-                android:useDefaultMargins="true">
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_utensils"
+                        app:tint="@color/text_hint"
+                        android:contentDescription="Empty Fridge" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardCherryTomatoes"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    app:cardCornerRadius="20dp">
-                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <FrameLayout android:layout_width="match_parent" android:layout_height="120dp">
-                            <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/img_cherry_tomatoes" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|end" android:layout_margin="8dp" android:background="@drawable/bg_badge_fresh" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="Fresh" android:textColor="@color/white" android:textSize="10sp" android:textStyle="bold" />
-                        </FrameLayout>
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp">
-                            <TextView android:id="@+id/tvName1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cherry Tomatoes" android:textStyle="bold" android:textColor="@color/text_primary" />
-                            <ImageView android:id="@+id/btnMoreCherryTomatoes" android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:src="@drawable/ic_more_vert" />
-                        </RelativeLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Tủ lạnh của bạn đang trống rỗng"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardBabySpinach"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    app:cardCornerRadius="20dp">
-                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <FrameLayout android:layout_width="match_parent" android:layout_height="120dp">
-                            <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/img_baby_spinach" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|end" android:layout_margin="8dp" android:background="@drawable/bg_badge_use_soon" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="Use Soon" android:textColor="@color/white" android:textSize="10sp" android:textStyle="bold" />
-                        </FrameLayout>
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Baby Spinach" android:textStyle="bold" android:textColor="@color/text_primary" />
-                            <ImageView android:id="@+id/btnMoreBabySpinach" android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:src="@drawable/ic_more_vert" />
-                        </RelativeLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
-
-            <!-- Proteins Section (Bổ sung để hết lỗi) -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-bold"
-                    android:text="Proteins"
-                    android:textColor="@color/text_primary"
-                    android:textSize="20sp" />
-                <TextView
-                    android:id="@+id/tvViewAllProteins"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="View All"
-                    android:textColor="@color/accent"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:columnCount="2"
-                android:useDefaultMargins="true">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardChickenBreast"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    app:cardCornerRadius="20dp">
-                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <FrameLayout android:layout_width="match_parent" android:layout_height="120dp">
-                            <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/img_chicken_breast" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|end" android:layout_margin="8dp" android:background="@drawable/bg_badge_expired" android:paddingHorizontal="10dp" android:paddingVertical="4dp" android:text="Expired" android:textColor="@color/white" android:textSize="10sp" android:textStyle="bold" />
-                        </FrameLayout>
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Chicken Breast" android:textStyle="bold" android:textColor="@color/text_primary" />
-                            <ImageView android:id="@+id/btnMoreChickenBreast" android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:src="@drawable/ic_more_vert" />
-                        </RelativeLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardAtlanticSalmon"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    app:cardCornerRadius="20dp">
-                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <FrameLayout android:layout_width="match_parent" android:layout_height="120dp">
-                            <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@drawable/img_atlantic_salmon_raw" />
-                        </FrameLayout>
-                        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Atlantic Salmon" android:textStyle="bold" android:textColor="@color/text_primary" />
-                            <ImageView android:id="@+id/btnMoreAtlanticSalmon" android:layout_width="20dp" android:layout_height="20dp" android:layout_alignParentEnd="true" android:src="@drawable/ic_more_vert" />
-                        </RelativeLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
-
-            <!-- Pantry Section (Bổ sung để hết lỗi) -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-bold"
-                    android:text="Pantry"
-                    android:textColor="@color/text_primary"
-                    android:textSize="20sp" />
-                <TextView
-                    android:id="@+id/tvViewAllPantry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:text="View All"
-                    android:textColor="@color/accent"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/cardOliveOil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_stats_card"
-                android:padding="16dp"
-                android:gravity="center_vertical">
-                <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_utensils" app:tint="@color/primary" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="16dp" android:text="Olive Oil" android:textStyle="bold" />
-                <ImageView android:id="@+id/btnMoreOliveOil" android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_more_vert" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/cardPennePasta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/bg_stats_card"
-                android:padding="16dp"
-                android:gravity="center_vertical">
-                <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/ic_utensils" app:tint="@color/primary" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="16dp" android:text="Penne Pasta" android:textStyle="bold" />
-                <ImageView android:id="@+id/btnMorePennePasta" android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_more_vert" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Hãy bấm nút + ở góc dưới để thêm thực phẩm nhé!"
+                        android:textColor="@color/text_hint"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

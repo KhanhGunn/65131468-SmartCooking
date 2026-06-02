@@ -11,7 +11,7 @@
     <item
         android:id="@+id/nav_planner"
         android:icon="@drawable/ic_planner"
-        android:title="@string/nav_assistant" />
+        android:title="@string/nav_planner" />
     <item
         android:id="@+id/nav_inventory"
         android:icon="@drawable/ic_inventory"

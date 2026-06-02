@@ -5,11 +5,7 @@ plugins {
 
 android {
     namespace 'gun.edu.smartcooking'
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk 36
 
     defaultConfig {
         applicationId "gun.edu.smartcooking"
@@ -27,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
@@ -40,6 +40,7 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.recyclerview
     implementation libs.cardview
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     // Firebase
     implementation libs.firebase.database

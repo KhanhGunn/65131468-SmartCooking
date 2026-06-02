@@ -1,12 +1,10 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +16,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
+import gun.edu.smartcooking.R;
+import gun.edu.smartcooking.databinding.ActivityRecipeDetailBinding;
+import gun.edu.smartcooking.firebase.FirebaseHelper;
+import gun.edu.smartcooking.model.Recipe;
+
 /**
  * Activity hiển thị chi tiết công thức nấu ăn
  */
@@ -25,11 +28,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_RECIPE_ID = "recipe_id";
 
-    private ImageView ivDetailImage, btnBack, btnDetailFavorite;
-    private TextView tvDetailName, tvDetailDesc, tvDetailCategory;
-    private TextView tvDetailTime, tvDetailCalories, tvDetailRating;
-    private LinearLayout layoutIngredients, layoutSteps;
-
+    private ActivityRecipeDetailBinding binding;
     private FirebaseHelper firebaseHelper;
     private String recipeId;
     private boolean isFavorite = false;
@@ -42,40 +41,35 @@ public class RecipeDetailActivity extends AppCompatActivity {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        setContentView(R.layout.activity_recipe_detail);
-
-        // Init views
-        ivDetailImage = findViewById(R.id.ivDetailImage);
-        btnBack = findViewById(R.id.btnBack);
-        btnDetailFavorite = findViewById(R.id.btnDetailFavorite);
-        tvDetailName = findViewById(R.id.tvDetailName);
-        tvDetailDesc = findViewById(R.id.tvDetailDesc);
-        tvDetailCategory = findViewById(R.id.tvDetailCategory);
-        tvDetailTime = findViewById(R.id.tvDetailTime);
-        tvDetailCalories = findViewById(R.id.tvDetailCalories);
-        tvDetailRating = findViewById(R.id.tvDetailRating);
-        layoutIngredients = findViewById(R.id.layoutIngredients);
-        layoutSteps = findViewById(R.id.layoutSteps);
+        binding = ActivityRecipeDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         firebaseHelper = FirebaseHelper.getInstance();
 
-        // Back button
-        btnBack.setOnClickListener(v -> finish());
+        binding.btnBack.setOnClickListener(v -> finish());
 
-        // Get recipe ID from intent
         recipeId = getIntent().getStringExtra(EXTRA_RECIPE_ID);
         if (recipeId != null) {
             loadRecipe(recipeId);
             checkFavoriteStatus();
         }
 
-        // Favorite button
-        btnDetailFavorite.setOnClickListener(v -> toggleFavorite());
+        binding.btnDetailFavorite.setOnClickListener(v -> toggleFavorite());
+
+        binding.btnStartCooking.setOnClickListener(v -> {
+            // Rung phản hồi xúc giác nhẹ (Haptic Feedback) giúp UX chân thật
+            v.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP);
+
+            // Hiển thị Snackbar thông báo thuần Việt có nút hành động
+            com.google.android.material.snackbar.Snackbar.make(binding.getRoot(),
+                    "Đầu bếp SavorSmart ơi! Hãy chuẩn bị nguyên liệu và bắt đầu nấu ăn nhé! 🍳🔥",
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
+                    .setAction("Đồng ý", view1 -> {})
+                    .setActionTextColor(getResources().getColor(R.color.secondary, null))
+                    .show();
+        });
     }
 
-    /**
-     * Load dữ liệu công thức từ Firebase
-     */
     private void loadRecipe(String recipeId) {
         firebaseHelper.getRecipeById(recipeId, new FirebaseHelper.RecipeCallback() {
             @Override
@@ -92,44 +86,32 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Hiển thị dữ liệu công thức lên UI
-     */
     private void displayRecipe(Recipe recipe) {
-        // Image
-        recipe.displayImage(this, ivDetailImage);
+        recipe.displayImage(this, binding.ivDetailImage);
 
-        // Basic info
-        tvDetailName.setText(recipe.getName());
-        tvDetailDesc.setText(recipe.getDescription());
-        tvDetailTime.setText(recipe.getPrepTimeMinutes() + " phút");
-        tvDetailCalories.setText(recipe.getCalories() + " kcal");
-        tvDetailRating.setText(String.valueOf(recipe.getRating()));
+        binding.tvDetailName.setText(recipe.getName());
+        binding.tvDetailDesc.setText(recipe.getDescription());
+        binding.tvDetailTime.setText(recipe.getPrepTimeMinutes() + " phút");
+        binding.tvDetailCalories.setText(recipe.getCalories() + " kcal");
+        binding.tvDetailRating.setText(String.valueOf(recipe.getRating()));
 
-        // Category
         String category = recipe.getCategory();
         if (category != null) {
             switch (category) {
-                case "breakfast": tvDetailCategory.setText("🌅 Bữa sáng"); break;
-                case "lunch": tvDetailCategory.setText("☀️ Bữa trưa"); break;
-                case "dinner": tvDetailCategory.setText("🌙 Bữa tối"); break;
-                case "healthy": tvDetailCategory.setText("🥗 Healthy"); break;
-                default: tvDetailCategory.setText(category);
+                case "breakfast": binding.tvDetailCategory.setText("🌅 Bữa sáng"); break;
+                case "lunch": binding.tvDetailCategory.setText("☀️ Bữa trưa"); break;
+                case "dinner": binding.tvDetailCategory.setText("🌙 Bữa tối"); break;
+                case "healthy": binding.tvDetailCategory.setText("🥗 Dinh dưỡng"); break;
+                default: binding.tvDetailCategory.setText(category);
             }
         }
 
-        // Ingredients
         buildIngredientsSection(recipe.getIngredients());
-
-        // Steps
         buildStepsSection(recipe.getSteps());
     }
 
-    /**
-     * Tạo danh sách nguyên liệu
-     */
     private void buildIngredientsSection(List<String> ingredients) {
-        layoutIngredients.removeAllViews();
+        binding.layoutIngredients.removeAllViews();
 
         if (ingredients == null) return;
 
@@ -140,13 +122,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
             itemLayout.setPadding(dp(14), dp(12), dp(14), dp(12));
             itemLayout.setBackgroundResource(R.drawable.bg_ingredient_item);
 
-            // Dot indicator
             View dot = new View(this);
             LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(dp(8), dp(8));
             dot.setLayoutParams(dotParams);
             dot.setBackgroundResource(R.drawable.bg_step_number);
 
-            // Text
             TextView tvIngredient = new TextView(this);
             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -159,21 +139,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
             itemLayout.addView(dot);
             itemLayout.addView(tvIngredient);
 
-            // Margin between items
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             if (i > 0) layoutParams.topMargin = dp(8);
             itemLayout.setLayoutParams(layoutParams);
 
-            layoutIngredients.addView(itemLayout);
+            binding.layoutIngredients.addView(itemLayout);
         }
     }
 
-    /**
-     * Tạo danh sách các bước thực hiện
-     */
     private void buildStepsSection(List<String> steps) {
-        layoutSteps.removeAllViews();
+        binding.layoutSteps.removeAllViews();
 
         if (steps == null) return;
 
@@ -182,7 +158,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
             stepLayout.setOrientation(LinearLayout.HORIZONTAL);
             stepLayout.setPadding(0, dp(8), 0, dp(8));
 
-            // Step number circle
             TextView tvNumber = new TextView(this);
             LinearLayout.LayoutParams numParams = new LinearLayout.LayoutParams(dp(28), dp(28));
             numParams.topMargin = dp(2);
@@ -193,7 +168,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
             tvNumber.setTextSize(12);
             tvNumber.setGravity(Gravity.CENTER);
 
-            // Step text
             TextView tvStep = new TextView(this);
             LinearLayout.LayoutParams stepParams = new LinearLayout.LayoutParams(
                     0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
@@ -207,15 +181,13 @@ public class RecipeDetailActivity extends AppCompatActivity {
             stepLayout.addView(tvNumber);
             stepLayout.addView(tvStep);
 
-            // Margin between steps
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             if (i > 0) layoutParams.topMargin = dp(4);
             stepLayout.setLayoutParams(layoutParams);
 
-            layoutSteps.addView(stepLayout);
+            binding.layoutSteps.addView(stepLayout);
 
-            // Divider line between steps (except last)
             if (i < steps.size() - 1) {
                 View divider = new View(this);
                 LinearLayout.LayoutParams divParams = new LinearLayout.LayoutParams(
@@ -224,14 +196,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
                 divParams.topMargin = dp(8);
                 divider.setLayoutParams(divParams);
                 divider.setBackgroundColor(getColor(R.color.divider));
-                layoutSteps.addView(divider);
+                binding.layoutSteps.addView(divider);
             }
         }
     }
 
-    /**
-     * Check favorite status từ Firebase
-     */
     private void checkFavoriteStatus() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null || recipeId == null) return;
@@ -242,9 +211,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Toggle favorite
-     */
     private void toggleFavorite() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -262,12 +228,9 @@ public class RecipeDetailActivity extends AppCompatActivity {
     }
 
     private void updateFavoriteIcon() {
-        btnDetailFavorite.setAlpha(isFavorite ? 1.0f : 0.6f);
+        binding.btnDetailFavorite.setAlpha(isFavorite ? 1.0f : 0.6f);
     }
 
-    /**
-     * Helper: dp to pixel
-     */
     private int dp(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }

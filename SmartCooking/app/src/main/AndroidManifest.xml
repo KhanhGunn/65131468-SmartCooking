@@ -16,7 +16,7 @@
 
         <!-- Splash Screen - Launcher -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.SmartCooking.Splash">
             <intent-filter>
@@ -27,25 +27,25 @@
 
         <!-- Login Screen -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Register Screen -->
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Main Screen -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Recipe Detail Screen -->
         <activity
-            android:name=".RecipeDetailActivity"
+            android:name=".ui.RecipeDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.SmartCooking" />
 

@@ -121,31 +121,31 @@
                     android:textSize="14sp"
                     android:importantForAutofill="no" />
 
-                <!-- Password Input Group -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="@string/label_password"
-                    android:textColor="@color/text_primary"
-                    android:textSize="13sp"
-                    android:fontFamily="sans-serif-medium" />
-
-                <EditText
-                    android:id="@+id/etPassword"
+                <!-- Wrapper hỗ trợ Password Toggle cho Mật khẩu -->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_edittext"
-                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                    android:drawablePadding="14dp"
-                    android:hint="@string/hint_create_password"
-                    android:inputType="textPassword"
-                    android:paddingHorizontal="18dp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="#94A3B8"
-                    android:textSize="14sp"
-                    android:importantForAutofill="no" />
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/text_secondary"
+                    app:hintEnabled="false"
+                    app:boxBackgroundMode="none">
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:background="@drawable/bg_edittext"
+                        android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                        android:drawablePadding="14dp"
+                        android:hint="@string/hint_create_password"
+                        android:inputType="textPassword"
+                        android:paddingHorizontal="18dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="14sp"
+                        android:importantForAutofill="no" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Confirm Password Input Group -->
                 <TextView
@@ -157,21 +157,31 @@
                     android:textSize="13sp"
                     android:fontFamily="sans-serif-medium" />
 
-                <EditText
-                    android:id="@+id/etConfirmPassword"
+                <!-- Wrapper hỗ trợ Password Toggle cho Xác nhận mật khẩu -->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_edittext"
-                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                    android:drawablePadding="14dp"
-                    android:hint="@string/hint_confirm_password"
-                    android:inputType="textPassword"
-                    android:paddingHorizontal="18dp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="#94A3B8"
-                    android:textSize="14sp"
-                    android:importantForAutofill="no" />
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/text_secondary"
+                    app:hintEnabled="false"
+                    app:boxBackgroundMode="none">
+
+                    <EditText
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:background="@drawable/bg_edittext"
+                        android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                        android:drawablePadding="14dp"
+                        android:hint="@string/hint_confirm_password"
+                        android:inputType="textPassword"
+                        android:paddingHorizontal="18dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="14sp"
+                        android:importantForAutofill="no" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Submit Button -->
                 <Button

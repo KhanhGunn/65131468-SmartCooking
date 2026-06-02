@@ -1,7 +1,8 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import gun.edu.smartcooking.R;
 
 /**
  * Model class cho công thức nấu ăn

@@ -1,4 +1,4 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.model;
 
 /**
  * Model class cho item trong kho thực phẩm

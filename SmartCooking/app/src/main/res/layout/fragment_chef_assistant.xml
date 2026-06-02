@@ -35,6 +35,18 @@
             android:textColor="@color/text_primary"
             android:textSize="18sp" />
 
+        <!-- Settings/Key Button -->
+        <ImageView
+            android:id="@+id/btnSettings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_suggestion_chip"
+            android:contentDescription="Cấu hình API Key"
+            android:padding="8dp"
+            android:src="@drawable/ic_settings"
+            app:tint="@color/text_secondary" />
+
         <!-- Clear Button -->
         <LinearLayout
             android:id="@+id/btnClearChat"

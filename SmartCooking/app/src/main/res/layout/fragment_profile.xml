@@ -53,7 +53,7 @@
                     android:backgroundTint="@color/profile_ring"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
-                    android:text="Premium Member"
+                    android:text="@string/premium_member"
                     android:textColor="@color/white"
                     android:textSize="9sp"
                     android:textStyle="bold" />
@@ -109,7 +109,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Recipes"
+                        android:text="@string/label_recipes"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -133,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Followers"
+                        android:text="@string/label_followers"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -157,7 +157,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Level"
+                        android:text="@string/label_level"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -201,7 +201,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="My Recipes"
+                        android:text="@string/my_recipes"
                         android:textColor="@color/text_primary"
                         android:textStyle="bold" />
                     <ImageView
@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Cooking History"
+                        android:text="@string/cooking_history"
                         android:textColor="@color/text_primary"
                         android:textStyle="bold" />
                     <ImageView
@@ -263,7 +263,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Subscribed Plans"
+                        android:text="@string/subscribed_plans"
                         android:textColor="@color/text_primary"
                         android:textStyle="bold" />
                     <ImageView
@@ -294,7 +294,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Account Settings"
+                        android:text="@string/account_settings"
                         android:textColor="@color/text_primary"
                         android:textStyle="bold" />
                     <ImageView
@@ -325,7 +325,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Help &amp; Support"
+                        android:text="@string/help_support"
                         android:textColor="@color/text_primary"
                         android:textStyle="bold" />
                     <ImageView
@@ -350,7 +350,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log Out"
+                android:text="@string/logout"
                 android:textColor="@color/error"
                 android:textStyle="bold"
                 android:textSize="15sp" />

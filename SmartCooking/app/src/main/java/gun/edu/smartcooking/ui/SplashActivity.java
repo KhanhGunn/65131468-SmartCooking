@@ -1,14 +1,11 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
@@ -18,9 +15,13 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import gun.edu.smartcooking.R;
+import gun.edu.smartcooking.databinding.ActivitySplashBinding;
+
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DURATION = 3000; // 3 giây
+    private static final int SPLASH_DURATION = 1800; // 1.8 giây
+    private ActivitySplashBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +41,15 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
         getWindow().setNavigationBarColor(android.graphics.Color.TRANSPARENT);
 
-        setContentView(R.layout.activity_splash);
-
-        // Khởi tạo views
-        View glowView = findViewById(R.id.glowView);
-        LinearLayout logoContainer = findViewById(R.id.logoContainer);
-        TextView tvAppName = findViewById(R.id.tvAppName);
-        TextView tvTagline = findViewById(R.id.tvTagline);
-        LinearLayout poweredByContainer = findViewById(R.id.poweredByContainer);
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Ẩn tất cả views ban đầu
-        glowView.setAlpha(0f);
-        logoContainer.setAlpha(0f);
-        tvAppName.setAlpha(0f);
-        tvTagline.setAlpha(0f);
-        poweredByContainer.setAlpha(0f);
+        binding.glowView.setAlpha(0f);
+        binding.logoContainer.setAlpha(0f);
+        binding.tvAppName.setAlpha(0f);
+        binding.tvTagline.setAlpha(0f);
+        binding.poweredByContainer.setAlpha(0f);
 
         // Load animations
         Animation scaleIn = AnimationUtils.loadAnimation(this, R.anim.scale_in);
@@ -64,8 +59,8 @@ public class SplashActivity extends AppCompatActivity {
         Animation pulseGlow = AnimationUtils.loadAnimation(this, R.anim.pulse_glow);
 
         // Chuỗi animation tuần tự
-        glowView.setAlpha(1f);
-        glowView.startAnimation(fadeIn);
+        binding.glowView.setAlpha(1f);
+        binding.glowView.startAnimation(fadeIn);
 
         fadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -73,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                glowView.startAnimation(pulseGlow);
+                binding.glowView.startAnimation(pulseGlow);
             }
 
             @Override
@@ -81,23 +76,23 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            logoContainer.setAlpha(1f);
-            logoContainer.startAnimation(scaleIn);
+            binding.logoContainer.setAlpha(1f);
+            binding.logoContainer.startAnimation(scaleIn);
         }, 200);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            tvAppName.setAlpha(1f);
-            tvAppName.startAnimation(slideUpFadeIn);
+            binding.tvAppName.setAlpha(1f);
+            binding.tvAppName.startAnimation(slideUpFadeIn);
         }, 600);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            tvTagline.setAlpha(1f);
-            tvTagline.startAnimation(fadeInSlow);
+            binding.tvTagline.setAlpha(1f);
+            binding.tvTagline.startAnimation(fadeInSlow);
         }, 1000);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            poweredByContainer.setAlpha(1f);
-            poweredByContainer.startAnimation(fadeInSlow);
+            binding.poweredByContainer.setAlpha(1f);
+            binding.poweredByContainer.startAnimation(fadeInSlow);
         }, 1400);
 
         // Sau SPLASH_DURATION, kiểm tra đăng nhập rồi chuyển hướng
@@ -106,10 +101,8 @@ public class SplashActivity extends AppCompatActivity {
 
             Intent intent;
             if (currentUser != null) {
-                // Đã đăng nhập → vào thẳng MainActivity
                 intent = new Intent(SplashActivity.this, MainActivity.class);
             } else {
-                // Chưa đăng nhập → vào LoginActivity
                 intent = new Intent(SplashActivity.this, LoginActivity.class);
             }
             startActivity(intent);

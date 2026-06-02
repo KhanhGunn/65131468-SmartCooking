@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="Tên thực phẩm (ví dụ: Thịt bò băm)">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etIngredientName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -23,6 +24,7 @@
         android:layout_marginTop="12dp"
         android:hint="Số lượng (ví dụ: 500g)">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etIngredientQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -35,6 +37,7 @@
         android:layout_marginTop="12dp"
         android:hint="Hạn sử dụng (ví dụ: Còn 5 ngày)">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etIngredientExpiry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />

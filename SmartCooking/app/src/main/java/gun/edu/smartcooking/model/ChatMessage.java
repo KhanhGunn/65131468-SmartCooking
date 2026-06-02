@@ -1,4 +1,4 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.model;
 
 /**
  * Model class đại diện cho một tin nhắn trong cuộc trò chuyện

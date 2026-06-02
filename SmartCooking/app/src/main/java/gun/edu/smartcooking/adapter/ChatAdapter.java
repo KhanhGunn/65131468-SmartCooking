@@ -1,4 +1,4 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import gun.edu.smartcooking.R;
+import gun.edu.smartcooking.model.ChatMessage;
+
 /**
  * Adapter cho RecyclerView hiển thị tin nhắn chat
  * Hỗ trợ 2 loại ViewHolder: AI message và User message
@@ -18,6 +21,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_AI = 0;
     private static final int VIEW_TYPE_USER = 1;
+    private static final int VIEW_TYPE_LOADING = 2;
 
     private final List<ChatMessage> messages;
 
@@ -27,7 +31,14 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return messages.get(position).isUser() ? VIEW_TYPE_USER : VIEW_TYPE_AI;
+        ChatMessage msg = messages.get(position);
+        if (msg.isUser()) {
+            return VIEW_TYPE_USER;
+        } else if (msg.getMessage() != null && (msg.getMessage().contains("đang suy nghĩ") || msg.getMessage().contains("đang soạn"))) {
+            return VIEW_TYPE_LOADING;
+        } else {
+            return VIEW_TYPE_AI;
+        }
     }
 
     @NonNull
@@ -37,6 +48,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (viewType == VIEW_TYPE_USER) {
             View view = inflater.inflate(R.layout.item_message_user, parent, false);
             return new UserMessageViewHolder(view);
+        } else if (viewType == VIEW_TYPE_LOADING) {
+            View view = inflater.inflate(R.layout.item_message_loading, parent, false);
+            return new LoadingMessageViewHolder(view);
         } else {
             View view = inflater.inflate(R.layout.item_message_ai, parent, false);
             return new AiMessageViewHolder(view);
@@ -87,6 +101,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void bind(ChatMessage message) {
             tvUserMessage.setText(message.getMessage());
+        }
+    }
+
+    /**
+     * ViewHolder hiển thị bong bóng AI đang soạn câu trả lời
+     */
+    static class LoadingMessageViewHolder extends RecyclerView.ViewHolder {
+        LoadingMessageViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

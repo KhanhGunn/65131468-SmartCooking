@@ -1,11 +1,8 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,77 +10,63 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import gun.edu.smartcooking.R;
+import gun.edu.smartcooking.databinding.ActivityLoginBinding;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etEmail, etPassword;
-    private Button btnLogin;
-    private TextView tvRegister;
+    private ActivityLoginBinding binding;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // Ánh xạ views
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        btnLogin = findViewById(R.id.btnLogin);
-        tvRegister = findViewById(R.id.tvRegister);
-
-        // Sự kiện đăng ký
-        tvRegister.setOnClickListener(v -> {
+        binding.tvRegister.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
 
-        // Sự kiện đăng nhập
-        btnLogin.setOnClickListener(v -> loginUser());
+        binding.btnLogin.setOnClickListener(v -> loginUser());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        // Kiểm tra nếu đã đăng nhập thì chuyển vào Main
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             goToMain();
         }
     }
 
-    /**
-     * Xác thực và đăng nhập với Firebase
-     */
     private void loginUser() {
-        String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+        String email = binding.etEmail.getText().toString().trim();
+        String password = binding.etPassword.getText().toString().trim();
 
-        // Validate
         if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Vui lòng nhập email");
-            etEmail.requestFocus();
+            binding.etEmail.setError("Vui lòng nhập email");
+            binding.etEmail.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            etPassword.setError("Vui lòng nhập mật khẩu");
-            etPassword.requestFocus();
+            binding.etPassword.setError("Vui lòng nhập mật khẩu");
+            binding.etPassword.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            etPassword.setError("Mật khẩu phải ít nhất 6 ký tự");
-            etPassword.requestFocus();
+            binding.etPassword.setError("Mật khẩu phải ít nhất 6 ký tự");
+            binding.etPassword.requestFocus();
             return;
         }
 
-        // Hiện loading
         setLoading(true);
 
-        // Firebase sign in
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     setLoading(false);
@@ -107,9 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    /**
-     * Chuyển sang MainActivity
-     */
     private void goToMain() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -117,12 +97,9 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    /**
-     * Hiện/ẩn loading state
-     */
     private void setLoading(boolean isLoading) {
-        btnLogin.setEnabled(!isLoading);
-        btnLogin.setAlpha(isLoading ? 0.6f : 1.0f);
-        btnLogin.setText(isLoading ? "Đang đăng nhập..." : getString(R.string.btn_login));
+        binding.btnLogin.setEnabled(!isLoading);
+        binding.btnLogin.setAlpha(isLoading ? 0.6f : 1.0f);
+        binding.btnLogin.setText(isLoading ? "Đang đăng nhập..." : getString(R.string.btn_login));
     }
 }

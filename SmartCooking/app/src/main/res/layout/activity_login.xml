@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:gravity="center"
-            android:text="Welcome back! Let's get cooking."
+            android:text="Chào mừng bạn quay lại! Cùng SavorSmart nấu ăn nào."
             android:textColor="@color/text_secondary"
             android:textSize="15sp"
             android:fontFamily="sans-serif" />
@@ -125,22 +125,32 @@
                         android:fontFamily="sans-serif-medium" />
                 </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/etPassword"
+                <!-- Wrapper hỗ trợ Password Toggle ẩn hiện của Material Components -->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_edittext"
-                    android:drawableStart="@android:drawable/ic_lock_idle_lock"
-                    android:drawablePadding="14dp"
-                    android:hint="@string/hint_password"
-                    android:inputType="textPassword"
-                    android:paddingHorizontal="18dp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="#94A3B8"
-                    android:textSize="15sp"
-                    android:importantForAutofill="no"
-                    app:tint="@color/text_secondary" />
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/text_secondary"
+                    app:hintEnabled="false"
+                    app:boxBackgroundMode="none">
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_edittext"
+                        android:drawableStart="@android:drawable/ic_lock_idle_lock"
+                        android:drawablePadding="14dp"
+                        android:hint="@string/hint_password"
+                        android:inputType="textPassword"
+                        android:paddingHorizontal="18dp"
+                        android:textColor="@color/text_primary"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="15sp"
+                        android:importantForAutofill="no"
+                        app:tint="@color/text_secondary" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Submit Button -->
                 <Button

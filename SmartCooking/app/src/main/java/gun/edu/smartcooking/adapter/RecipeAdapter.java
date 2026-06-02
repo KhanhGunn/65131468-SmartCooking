@@ -1,4 +1,4 @@
-package gun.edu.smartcooking;
+package gun.edu.smartcooking.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,13 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import gun.edu.smartcooking.R;
+import gun.edu.smartcooking.model.Recipe;
+
 /**
- * Adapter hiển thị danh sách công thức trong RecyclerView
+ * Adapter cho RecyclerView hiển thị danh sách công thức nấu ăn
+ * Đã được tối ưu hóa click listeners để tăng hiệu năng cuộn tối đa.
  */
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
-    private final List<Recipe> recipes;
     private final Context context;
+    private final List<Recipe> recipes;
     private OnRecipeClickListener listener;
     private OnFavoriteClickListener favoriteListener;
 
@@ -40,14 +44,31 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     public void setOnFavoriteClickListener(OnFavoriteClickListener listener) {
-        this.favoriteListener = favoriteListener;
+        this.favoriteListener = listener;
     }
 
     @NonNull
     @Override
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_recipe_card, parent, false);
-        return new RecipeViewHolder(view);
+        RecipeViewHolder holder = new RecipeViewHolder(view);
+
+        // Thiết lập Click Listener tại đây thay vì trong onBindViewHolder để tránh Garbage Collector Overhead
+        holder.cardRecipe.setOnClickListener(v -> {
+            int pos = holder.getAbsoluteAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION && listener != null) {
+                listener.onRecipeClick(recipes.get(pos));
+            }
+        });
+
+        holder.btnFavorite.setOnClickListener(v -> {
+            int pos = holder.getAbsoluteAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION && favoriteListener != null) {
+                favoriteListener.onFavoriteClick(recipes.get(pos), pos);
+            }
+        });
+
+        return holder;
     }
 
     @Override
@@ -61,7 +82,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.tvCalories.setText(recipe.getCalories() + " kcal");
         holder.tvRating.setText(String.valueOf(recipe.getRating()));
 
-        // Hiển thị Category
+        // Hiển thị Category thuần Việt
         String category = recipe.getCategory();
         if (category != null) {
             switch (category) {
@@ -73,20 +94,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             }
         }
 
-        // Cập nhật phương thức hiển thị ảnh: Hỗ trợ cả Local và URL Cloud
+        // Cập nhật hiển thị ảnh (Hỗ trợ Local & Cloud qua Glide cache)
         recipe.displayImage(context, holder.ivRecipeImage);
 
         // Trạng thái yêu thích
         holder.btnFavorite.setAlpha(recipe.isFavorite() ? 1.0f : 0.4f);
-
-        // Click listeners
-        holder.cardRecipe.setOnClickListener(v -> {
-            if (listener != null) listener.onRecipeClick(recipe);
-        });
-
-        holder.btnFavorite.setOnClickListener(v -> {
-            if (favoriteListener != null) favoriteListener.onFavoriteClick(recipe, position);
-        });
     }
 
     @Override
