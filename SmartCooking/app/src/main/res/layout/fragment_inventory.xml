@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshInventory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="100dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -24,16 +23,19 @@
                 app:cardBackgroundColor="@color/accent_light"
                 app:cardCornerRadius="28dp"
                 app:cardElevation="0dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="24dp"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -41,6 +43,7 @@
                             android:text="@string/inventory_insights_title"
                             android:textColor="@color/text_primary"
                             android:textSize="18sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -48,6 +51,7 @@
                             android:text="@string/inventory_insights_desc"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp" />
+
                         <TextView
                             android:id="@+id/btnGenerateRecipe"
                             android:layout_width="wrap_content"
@@ -62,6 +66,7 @@
                             android:textStyle="bold"
                             app:backgroundTint="@color/primary" />
                     </LinearLayout>
+
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -81,22 +86,16 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_marginTop="12dp">
 
-                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                    android:id="@+id/swipeRefreshInventory"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvInventory"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvInventory"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        android:paddingBottom="80dp"
-                        android:clipToPadding="false" />
-                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                    android:layout_height="match_parent"
+                    android:paddingBottom="80dp"
+                    android:clipToPadding="false" />
 
                 <!-- Trạng thái trống (Empty State) -->
                 <LinearLayout
@@ -136,16 +135,17 @@
             </FrameLayout>
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="24dp"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="@color/primary"
-        app:tint="@color/white" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="24dp"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/primary"
+            app:tint="@color/white" />
 
-</FrameLayout>
+    </FrameLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

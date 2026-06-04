@@ -34,19 +34,22 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnLogin.setOnClickListener(v -> loginUser());
     }
 
+    // KIỂM TRA ĐĂNG NHẬP SẴN CÓ: Nếu người dùng đã đăng nhập trước đó, tự động chuyển thẳng vào màn hình chính
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser(); // Lấy thông tin user hiện tại từ Firebase Auth
         if (currentUser != null) {
-            goToMain();
+            goToMain(); // Chuyển trang
         }
     }
 
+    // PHƯƠNG THỨC XỬ LÝ ĐĂNG NHẬP
     private void loginUser() {
         String email = binding.etEmail.getText().toString().trim();
         String password = binding.etPassword.getText().toString().trim();
 
+        // 1. Kiểm tra tính hợp lệ của dữ liệu đầu vào (Validation)
         if (TextUtils.isEmpty(email)) {
             binding.etEmail.setError("Vui lòng nhập email");
             binding.etEmail.requestFocus();
@@ -65,15 +68,17 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        setLoading(true);
+        setLoading(true); // Hiển thị trạng thái đang xử lý đăng nhập
 
+
+ // Quan trọng  2. Gọi Firebase Auth API để xác thực Email và Mật khẩu
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-                    setLoading(false);
-                    if (task.isSuccessful()) {
+                    setLoading(false); // Tắt trạng thái xử lý
+                    if (task.isSuccessful()) { // Đăng nhập thành công
                         Toast.makeText(this, "Đăng nhập thành công! 🎉", Toast.LENGTH_SHORT).show();
-                        goToMain();
-                    } else {
+                        goToMain(); // Chuyển sang màn hình chính
+                    } else { // Đăng nhập thất bại -> Phân tích mã lỗi từ Firebase để hiển thị thông báo thân thiện
                         String errorMsg = "Đăng nhập thất bại";
                         if (task.getException() != null) {
                             String exMsg = task.getException().getMessage();
@@ -90,13 +95,16 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    // CHUYỂN SANG MÀN HÌNH CHÍNH (MAIN ACTIVITY)
     private void goToMain() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        // Thiết lập các Flag để xóa sạch ngăn xếp (Stack) các Activity trước đó, ngăn người dùng nhấn Back để quay lại màn hình Login
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+        finish(); // Hủy Activity hiện tại
     }
 
+    // THIẾT LẬP HIỆU ỨNG LOADING TRÊN NÚT ĐĂNG NHẬP
     private void setLoading(boolean isLoading) {
         binding.btnLogin.setEnabled(!isLoading);
         binding.btnLogin.setAlpha(isLoading ? 0.6f : 1.0f);

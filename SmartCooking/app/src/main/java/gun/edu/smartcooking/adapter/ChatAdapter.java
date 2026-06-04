@@ -29,15 +29,16 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.messages = messages;
     }
 
+    // GHI ĐÈ PHƯƠNG THỨC PHÂN LOẠI VIEW TYPE: Dùng để xác định tin nhắn này thuộc về ai (để nạp layout tương ứng)
     @Override
     public int getItemViewType(int position) {
         ChatMessage msg = messages.get(position);
         if (msg.isUser()) {
-            return VIEW_TYPE_USER;
+            return VIEW_TYPE_USER; // Tin nhắn từ phía người dùng
         } else if (msg.getMessage() != null && (msg.getMessage().contains("đang suy nghĩ") || msg.getMessage().contains("đang soạn"))) {
-            return VIEW_TYPE_LOADING;
+            return VIEW_TYPE_LOADING; // Tin nhắn AI đang xử lý (hiển thị chấm xoay tròn/hiệu ứng loading)
         } else {
-            return VIEW_TYPE_AI;
+            return VIEW_TYPE_AI; // Tin nhắn trả lời từ AI Chef
         }
     }
 
@@ -45,18 +46,23 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        // [XỬ LÝ ĐA DẠNG LAYOUT] Dựa vào View Type đã phân loại ở trên để nạp (inflate) layout xml tương ứng
         if (viewType == VIEW_TYPE_USER) {
+            // Nạp layout bong bóng chat nằm bên phải (màu cam) của người dùng
             View view = inflater.inflate(R.layout.item_message_user, parent, false);
             return new UserMessageViewHolder(view);
         } else if (viewType == VIEW_TYPE_LOADING) {
+            // Nạp layout hiển thị bong bóng loading đang chờ AI trả lời
             View view = inflater.inflate(R.layout.item_message_loading, parent, false);
             return new LoadingMessageViewHolder(view);
         } else {
+            // Nạp layout bong bóng chat nằm bên trái (màu xám nhạt) của AI
             View view = inflater.inflate(R.layout.item_message_ai, parent, false);
             return new AiMessageViewHolder(view);
         }
     }
 
+    // GẮN DỮ LIỆU VÀO VIEW: Đổ nội dung tin nhắn dạng text lên TextView tương ứng của mỗi bong bóng chat
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ChatMessage message = messages.get(position);
@@ -69,7 +75,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return messages.size(); // Trả về tổng số lượng tin nhắn trong cuộc hội thoại
     }
 
     /**

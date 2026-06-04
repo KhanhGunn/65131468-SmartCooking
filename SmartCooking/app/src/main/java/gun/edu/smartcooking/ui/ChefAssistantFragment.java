@@ -140,6 +140,7 @@ public class ChefAssistantFragment extends Fragment {
     }
 
     private void sendSuggestion(String suggestion) {
+        if (binding == null) return;
         Boolean isWaiting = viewModel.getIsWaitingResponse().getValue();
         if (isWaiting != null && isWaiting) return;
 
@@ -157,7 +158,7 @@ public class ChefAssistantFragment extends Fragment {
         viewModel.getGeminiService().sendMessage(userMessage, new GeminiApiService.GeminiCallback() {
             @Override
             public void onSuccess(String response) {
-                if (!isAdded()) return;
+                if (!isAdded() || binding == null) return;
                 viewModel.setWaitingResponse(false);
 
                 if (typingPosition < messageList.size()) {
@@ -169,7 +170,7 @@ public class ChefAssistantFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-                if (!isAdded()) return;
+                if (!isAdded() || binding == null) return;
                 viewModel.setWaitingResponse(false);
 
                 if (typingPosition < messageList.size()) {
